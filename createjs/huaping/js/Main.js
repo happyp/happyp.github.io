@@ -143,6 +143,7 @@ function onProgress(e)
 
 function handleComplete()
 {
+    stage.removeChild(progressText);
     eventInit();
     
 }
