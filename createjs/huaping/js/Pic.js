@@ -1,11 +1,11 @@
 (function(m)
 {
-	var Pic = function(col,src)
+	var Pic = function(col,img)
     {
         //这里定义变量  this.xxx  xxx就是定义的变量
         //一般性的属性设置
         //图片路径
-        this.src = src;
+        this.img = img;
         //定义舞台  获取主程序的舞台
         this.stage;
         //横向 纵向 分成几份 碎片
@@ -16,8 +16,6 @@
         //var myClass = new MyShape(...,...);
         //myClass.displayObject
         
-        //加载类
-        this.loader;
         //图片
         this.image;
         //切割线
@@ -40,16 +38,8 @@
         // 这里定义函数方法  格式 xxx:function()  
         init:function()
         {
-            var manifest = 
-            [
-                {src:this.src , id:"pic"}
-            ]
-            this.loader = new createjs.LoadQueue(false);
-            var _this = this;
-            this.loader.addEventListener("complete" , function(e){_this.handleComplete()});
-            this.loader.loadManifest(manifest);
-            
             this.backPoint = {x:this.col-1,y:this.col-1};
+            this.handleComplete();
         },
         
         //图片加载完毕  处理函数
@@ -57,9 +47,10 @@
         {
            
             this.image = new createjs.Shape();
-            this.loader.getResult("pic")
             //获取到外部的图片
-            var pic = this.loader.getResult("pic")
+            var pic = this.img;
+            
+            console.log(pic);
             
             this.image.graphics.beginBitmapFill(pic)
             this.image.graphics.drawRect(0, 0, pic.width,pic.height);
@@ -505,9 +496,9 @@
     
     
 
-	m.Pic = function(col,src)
+	m.Pic = function(col,img)
     {
-		return new Pic(col,src)
+		return new Pic(col,img)
 	};
 })(window)
 

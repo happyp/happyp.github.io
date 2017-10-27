@@ -30,8 +30,8 @@ var gameTimer
 //随机一张图片
 var randomPicInt
 
-
-
+//加载图片
+var loader
 //开始游戏 界面
 var beginScence;
 //选择阶数 界面
@@ -63,11 +63,12 @@ function init()
     stage = new createjs.Stage("GameView");
     stage.enableMouseOver(10);
     createjs.Ticker.addEventListener("tick",onTick);
-    
 
     stageWidth = canvas.width;
     stageHeight = canvas.height;
-
+    
+    loadImages();
+    
     //--------------------------开始游戏 界面--------------------------------------
     
     beginScence = new BeginScence();
@@ -95,6 +96,33 @@ function init()
     stage.addChild(gameOverScence.scence)
     
     
+    
+}
+
+function loadImages()
+{
+    "images/1.jpg"
+    
+    var manifest = 
+    [
+        {src:"images/1.jpg" , id:"pic1"},
+        {src:"images/2.jpg" , id:"pic2"},
+        {src:"images/3.jpg" , id:"pic3"},
+        {src:"images/4.jpg" , id:"pic4"},
+        {src:"images/5.jpg" , id:"pic5"},
+        {src:"images/6.jpg" , id:"pic6"},
+        {src:"images/7.jpg" , id:"pic7"},
+        {src:"images/8.jpg" , id:"pic8"},
+        {src:"images/9.jpg" , id:"pic9"},
+        {src:"images/10.jpg" , id:"pic10"}
+    ]
+    loader = new createjs.LoadQueue(false);
+    loader.addEventListener("complete" , handleComplete);
+    loader.loadManifest(manifest);
+}
+
+function handleComplete()
+{
     eventInit();
     gameStart();
 }
@@ -203,7 +231,7 @@ function newGame(orders)
     
     
     
-    pic = new Pic(col,"images/"+randomPicInt+".jpg");
+    pic = new Pic(col,loader.getResult("pic" + randomPicInt ));
     pic.stage = stage;
     pic.init();
     gameScence.timeOut.times = gameTimer;
