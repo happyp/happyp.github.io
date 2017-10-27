@@ -1,0 +1,78 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+body
+{
+    background:#68cdd5;
+    font-size:16px;
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+
+.back
+{
+    margin: 5vh 0;
+}
+
+.logo
+{
+    margin: 5vh auto;
+}
+
+.logo img
+{
+    display: block;
+    margin: 0 auto;
+}
+
+.main_text
+{
+    width: 80%;
+    margin: 5vh auto;
+}
+
+.main_text p
+{
+    font-size:30px;
+    font-size:4vw;
+    color: #fff;
+
+}
+
+.minImage_left
+{
+    float: left;
+}
+
+.minImage_right
+{
+    float: right;
+}
+
+.minImage
+{
+    width: 80%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.minImage p
+{
+
+    font-size:4vw;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+}
+
+.minImage img
+{
+    width: 15vw;
+    display: block;
+    margin: 4vh auto 0;
+}
