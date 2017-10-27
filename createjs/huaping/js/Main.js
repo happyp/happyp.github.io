@@ -50,6 +50,9 @@ var isPause = false;
 //倒计时
 var timeOut;
 
+//加载图片的进度 文字
+var progressText;
+
 $(document).ready(function()
 {
     init();    
@@ -66,6 +69,12 @@ function init()
 
     stageWidth = canvas.width;
     stageHeight = canvas.height;
+    
+    progressText = new createjs.Text("progressText","30px Arial","#000");
+    progressText.x = stageWidth / 2;
+    progressText.y = 350;
+    progressText.textAlign="center";
+    stage.addChild(progressText);
     
     loadImages();
     
@@ -97,6 +106,7 @@ function init()
     
     gameStart();
     
+    
 }
 
 function loadImages()
@@ -118,9 +128,17 @@ function loadImages()
     ]
     loader = new createjs.LoadQueue(false);
     loader.addEventListener("complete" , handleComplete);
+    loader.addEventListener("progress",onProgress);
     loader.loadManifest(manifest);
     
     
+}
+
+function onProgress(e)
+{
+    console.log(e.progress)
+    
+    progressText.text = "拼命加载中:" + e.progress * 100 + "%";
 }
 
 function handleComplete()
