@@ -95,7 +95,7 @@ function init()
     gameOverScence = new GameOverScence();
     stage.addChild(gameOverScence.scence)
     
-    
+    gameStart();
     
 }
 
@@ -119,12 +119,14 @@ function loadImages()
     loader = new createjs.LoadQueue(false);
     loader.addEventListener("complete" , handleComplete);
     loader.loadManifest(manifest);
+    
+    
 }
 
 function handleComplete()
 {
     eventInit();
-    gameStart();
+    
 }
 
 function eventInit()
