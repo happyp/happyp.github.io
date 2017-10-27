@@ -8,7 +8,7 @@ body
 {
     background:#68cdd5;
     font-size:16px;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -16,7 +16,7 @@ body
 
 .back
 {
-    margin: 5vh 0;
+    margin: 20px 20px;
 }
 
 .logo
@@ -33,13 +33,14 @@ body
 .main_text
 {
     width: 80%;
-    margin: 5vh auto;
+    margin: 10vh auto;
 }
 
 .main_text p
 {
-    font-size:30px;
-    font-size:4vw;
+    display: block;
+    font-size: 2rem;
+    text-align: center;
     color: #fff;
 
 }
@@ -54,6 +55,11 @@ body
     float: right;
 }
 
+.minImage_left,.minImage_right
+{
+    margin: 10vh auto;
+}
+
 .minImage
 {
     width: 80%;
@@ -64,7 +70,7 @@ body
 .minImage p
 {
 
-    font-size:4vw;
+    font-size:1.5rem;
     font-weight: bold;
     color: #fff;
     display: block;
@@ -72,7 +78,7 @@ body
 
 .minImage img
 {
-    width: 15vw;
+
     display: block;
-    margin: 4vh auto 0;
+    margin: 0 auto;
 }
