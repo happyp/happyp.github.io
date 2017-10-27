@@ -52,7 +52,7 @@ var timeOut;
 
 //加载图片的进度 文字
 var progressText;
-
+var internalText
 $(document).ready(function()
 {
     init();    
@@ -75,6 +75,15 @@ function init()
     progressText.y = 350;
     progressText.textAlign="center";
     stage.addChild(progressText);
+    
+    
+    //说明:
+    internalText = new createjs.Text("自己之前制作的一个小游戏,修改了自适应(还不算完美,\n能够手机满屏显示),网速慢的情况下,资源加载方面\n可能会出现问题(还是学艺不精啊)","30px Arial","#000");
+    internalText.x = 0;
+    internalText.y = 0;
+    internalText.maxWidth = stageWidth;
+    
+    stage.addChild(internalText)
     
     loadImages();
     
@@ -186,6 +195,7 @@ function orderChange()
 //选择开始游戏界面
 function gameStart()
 {
+    
     beginScence.scence.visible = true;
     orderScence.scence.visible = false;
     instructionsScene.scence.visible = false;
@@ -258,6 +268,8 @@ function newGame(orders)
     gameScence.timeOut.times = gameTimer;
     gameScence.timeOut.makeTime();
     gameScence.timeOut.startTime();
+    
+    internalText.alpha = 0;
 }
 
 //重新开始  使用当前的 阶数  和 图片  再玩一次
