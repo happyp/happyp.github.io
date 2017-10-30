@@ -49,22 +49,58 @@ body
     text-align: center;
 }
 
-.master
+.master,.password
 {
     height:100px;
     width:100%;
     background: #fff;
     margin: 20px 0;
+    position: relative;
 }
 
-.master-body
+.master .image,.password .image
 {
+    margin: 28px 40px;
+    float: left;
+    width: 29px;
+    height: 44px;
+}
+
+.master .text,.password .text
+{
+    position: absolute;
+    top:24px;
+    border: 0px;
+    border-left: 1px solid #ccc;
+    padding-left: 25px;
+    height: 52px;
+    font-size: 2rem;
+    outline: none;
+}
+
+
+
+.landBt
+{
+    height:100px;
+    width:100%;
+    background: #5fc0cd;
+
+}
+
+.landBt p
+{
+    color: #fff;
+    font-size: 2.25rem;
+    line-height: 100px;
+    text-align: center;
+}
+
+.forgot_password p
+{
+    color: #5fc0cd;
+    font-size: 2rem;
+    text-align: right;
     width: 95%;
-    height: 100%;
     margin: 0 auto;
-}
-
-.master-body-image
-{
-
 }
