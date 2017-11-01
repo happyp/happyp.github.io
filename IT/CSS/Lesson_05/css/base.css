@@ -145,13 +145,12 @@ footer div:hover,footer div:active
 .main .bgImage .user
 {
     font-size: 0.15rem;
-    width: 1.5rem;
 }
 
 .main .bgImage .address
 {
     font-size: 0.14rem;
-    width: 1.5rem;
+
     padding-left: 0.3rem;
     background: url("../image/pos_img.png") no-repeat left center;
 }
@@ -208,12 +207,20 @@ footer div:hover,footer div:active
 
 }
 
+.main li #price
+{
+    color: #f00;
+    font-weight: bold;
+}
+
 .main .star
 {
     background: url("../image/icon_star.png") no-repeat left center;
     background-size: auto;
     padding-left: 0.3rem;
     width: 0.8rem;
+    height: 0.24rem;
+    line-height: 0.24rem;
 }
 
 .main #star_1
@@ -224,7 +231,6 @@ footer div:hover,footer div:active
 .main #star_2
 {
     margin-left: 1rem;
-
 }
 
 
