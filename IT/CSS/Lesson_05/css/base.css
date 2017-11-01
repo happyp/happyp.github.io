@@ -1,137 +1,237 @@
 *
 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
 }
 
-body
+html
 {
-    font-size: 16px;
+    /*background: #fcc;*/
+    font-size: 625%;
 }
 
+/*头部*/
 header
 {
-    height:45px;
-    width: 96%;
-    background: #5fc0cd;
+    width: 90%;
+    padding: 0 5%;
+    height: 0.4rem;
+    background: #59c0ce;
     position: relative;
-    padding: 0 2%;
 }
 
-header span,header h1
+
+header span,header p
 {
-    color: #fff;
-    line-height: 45px;
-    font-weight: bold;
+    color:#fff;
+    line-height: 0.4rem;
+    position: absolute;
+    top: 0;
+    width: 90%;
 }
 
+/*返回按钮*/
 header span
 {
-    font-size:1rem;
+    font-size: 0.3rem;
 }
 
-header h1
+/*个人主页*/
+header p
 {
-    position: absolute;
-    top:0px;
-    left:0px;
     text-align: center;
-    width: 100%;
-    font-size:1.7rem;
-    font-size:1.7rem;
+    font-size: 0.2rem;
 }
 
-
+/*尾部*/
 footer
 {
+    width: 100%;
+    height: 0.44rem;
+    /*使用 fixed 屏幕定位将尾部定位在底部*/
     position: fixed;
-    bottom: 0.1rem;
-    width: 96%;
-    padding: 0 2%;
+    bottom: 0rem;
+    /*background: #f00;*/
+    padding: 0.1rem 0;
+    /*flex布局*/
+    display: flex;
+    /*flex布局对齐方式*/
+    justify-content: center;
 }
 
 footer a
 {
-    font-size: 1rem;
-    line-height: 45px;
-    display: block;
+    /*清除下划线*/
+    text-decoration: none;
+    color: #59c0ce;
+    font-size: 0.2rem;
+    line-height: 0.4rem;
     width: 100%;
     text-align: center;
-    color: #5fc0cd;
-    text-decoration: none;
+    display: block;
 }
 
 footer div
 {
-    border: 0.1rem solid #5fc0cd;
-    border-radius: 10px;
-    height: 45px;
-    float: left;
-    width: 47%;
-    margin: 10px 0px;
+    height: 0.4rem;
+    width: 50%;
+    margin: 0 0.1rem;
+    border: 0.02rem solid #59c0ce;
+    border-radius: 0.1rem;
+
 }
 
-.phone
+footer a:hover,footer a:active
 {
-    float: right;
+    color: #fff;
 }
 
-footer a:hover
+footer div:hover,footer div:active
 {
-    color:#fff;
+    background: #59c0ce;
 }
 
-footer div:hover
-{
-    background: #5fc0cd;
-}
-
+/*主要部分*/
 .main
 {
-    overflow: auto;
+    /*将主体部分设置为 绝对定位 通过top bottom 来确定其大小*/
     position: absolute;
-    top: 45px;
-    bottom: 108px;
-    left: 0px;
-    right: 0px;
-}
+    bottom: 0.64rem;
+    top:0.4rem;
 
-.main .card
-{
     width: 100%;
-    height: 10rem;
-    background: #fff url(../image/card_bg.png) no-repeat left bottom;
+
+    /*overflow 设置多出部分怎么显示 以及 滚动条显示方式*/
+    overflow-y: auto;
+    overflow-x: hidden;
+    /*background: #ffff00;*/
+}
+
+.main .bgImage
+{
+    height: 1.5rem;
+    width: 100%;
+    background: #cfc url(../image/bg_img.jpg) no-repeat left bottom;
     background-size: cover;
+    position: relative;
 }
 
-.main ul li
+.main .bgImage .person
 {
-    min-height: 2rem;
-    padding: 1rem 1rem;
-
-    border-bottom: 0.1rem solid #ccc;
-    list-style-type: none;
-
+    background: #fff url(../image/person.png) no-repeat left top;
+    background-size: 0.8rem;
+    width: 0.8rem;
+    height: 0.8rem;
+    /*设置圆形头像*/
+    border-radius: 0.8rem;
+    position: absolute;
+    top:0.35rem;
+    left:0.35rem;
 }
 
-.min_title,.content
+.main .bgImage p
 {
-    line-height: 2rem;
+    color: #fff;
+    padding: 0.04rem 0;
 }
 
-.min_title
+.main .bgImage .info
 {
     position: absolute;
-    width: 5rem;
-    color: #ccc;
-    border-right: 0.1rem solid #ccc;
-
+    left: 1.5rem;
+    top:0.5rem;
 }
 
-.content
+.main .bgImage .user
 {
-    margin-left: 6rem;
+    font-size: 0.15rem;
+    width: 1.5rem;
 }
+
+.main .bgImage .address
+{
+    font-size: 0.14rem;
+    width: 1.5rem;
+    padding-left: 0.3rem;
+    background: url("../image/pos_img.png") no-repeat left center;
+}
+
+
+.main .bgImage .person img
+{
+    width: 0.57rem;
+    height: 0.75rem;
+}
+
+.main .skills
+{
+    border-bottom: 0.01rem solid #ccc;
+}
+
+.main .skills p
+{
+    border-left: 0.04rem solid #59c0ce;
+
+    font-size: 0.15rem;
+    padding-left: 0.2rem;
+    margin: 0.1rem;
+    width: 1rem;
+}
+
+
+.main li
+{
+    margin-left: 0.2rem;
+    list-style-type: none;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding: 0.2rem;
+    font-size: 0.15rem;
+
+}
+
+.main li .lable
+{
+    color: #999;
+    width: 0.8rem;
+    float: left;
+    border-right: 1px solid #ccc;
+
+    top:50%;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.main li .text
+{
+    margin-left: 1rem;
+
+}
+
+.main .star
+{
+    background: url("../image/icon_star.png") no-repeat left center;
+    background-size: auto;
+    padding-left: 0.3rem;
+    width: 0.8rem;
+}
+
+.main #star_1
+{
+    float: left;
+}
+
+.main #star_2
+{
+    margin-left: 1rem;
+
+}
+
+
+
+
+
+
 
 
 
