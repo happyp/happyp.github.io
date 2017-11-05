@@ -1,0 +1,90 @@
+.main
+{
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.main .banner
+{
+    width: 960px;
+    background: url("../images/webdesign_index_banner.png") no-repeat top left;
+    border-bottom: 1px dotted #000;
+}
+
+.main .banner .container
+{
+    width: 350px;
+    padding-top: 80px;
+}
+
+.main .banner .container ul
+{
+    padding-top: 20px;
+}
+
+.main .banner .container li
+{
+    list-style-type: none;
+    padding: 5px 0px 5px 20px;
+    background: url("../images/li_icon.png") no-repeat left center;
+}
+
+
+.main .process
+{
+    padding: 30px 0px;
+    border-bottom: 1px dotted #000;
+}
+
+.main .process li
+{
+    padding: 10px 0px;
+    list-style-type: none;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.package
+{
+    padding: 30px 0px;
+}
+
+.package .out_ul li
+{
+    list-style-type: none;
+
+}
+
+.package .standard_li
+{
+    padding: 10px 0px 10px 100px;
+    background: url("../images/webdesign_standard_icon.png") no-repeat left center;
+}
+
+
+.package .professional_li
+{
+    padding: 10px 0px 10px 100px;
+    background: url("../images/webdesign_professional_icon.png") no-repeat left center;
+}
+
+.package .advanced_li
+{
+    padding: 10px 0px 10px 100px;
+    background: url("../images/webdesign_advanced_icon.png") no-repeat left center;
+}
+
+.package .table
+{
+    font-weight: bold;
+}
+
+
+
+.package .choose
+{
+    padding-left: 20px;
+    margin-top: 30px;
+    background: url("../images/li_icon.png") no-repeat left center;
+}

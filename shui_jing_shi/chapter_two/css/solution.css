@@ -1,0 +1,60 @@
+
+.main
+{
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.main .menu
+{
+    float: right;
+    overflow: hidden;
+    padding-bottom: 30px;
+}
+
+.main .menu ul
+{
+    overflow: hidden;
+}
+
+.main .menu li
+{
+    list-style-type: none;
+    float: left;
+    padding: 0 2px;
+}
+
+.main .menu a
+{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 5px 10px;
+}
+
+.main .menu a:hover
+{
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.main .info
+{
+    background: url("../images/solution_index_banner.png") no-repeat left top;
+    margin-top: 30px;
+}
+
+.main .info .text
+{
+    padding-top: 200px;
+    width: 600px;
+}
+
+.main .info p
+{
+    padding: 10px;
+    line-height: 20px;
+    text-indent: 28px;
+}
+

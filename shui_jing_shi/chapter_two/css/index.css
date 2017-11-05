@@ -1,0 +1,108 @@
+/*----------------主体------------------------------*/
+
+.main
+{
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.main_left
+{
+    float: left;
+    width: 380px;
+}
+
+.main .title,.main .hand,.main .news
+{
+    padding: 40px 0px;
+
+}
+
+.main .news h5
+{
+    padding: 10px 0;
+}
+.main .news p
+{
+    white-space: normal;
+    padding: 10px 0;
+    line-height: 20px;
+}
+
+.main_right
+{
+    float: right;
+    width: 540px;
+    margin-left: 40px;
+}
+
+.right_slider
+{
+    width: 540px;
+    height: 230px;
+    margin: 50px 0;
+
+    position: relative;
+}
+
+.right_slider img
+{
+    border: 1px solid #fc0;
+    background: #f60;
+    padding: 4px;
+    width: 530px;
+    height: 220px;
+}
+
+.right_slider .pre,.next
+{
+    display: block;
+    width:43px;
+    height:35px;
+    position: absolute;
+}
+
+.right_slider .pre
+{
+    top: 100px;
+    background: url(../images/prev_button.png) no-repeat center top;
+}
+
+.right_slider .next
+{
+    top: 100px;
+    right: 0px;
+    background: url(../images/next_button.png) no-repeat center top;
+}
+
+.right_slider .pre:hover
+{
+    background: url(../images/prev_button_hover.png) no-repeat center top;
+}
+
+.right_slider .next:hover
+{
+    background: url(../images/next_button_hover.png) no-repeat center top;
+}
+
+.right_contents_link
+{
+    width: 540px;
+}
+
+.right_contents_link .img_left
+{
+    float: left;
+}
+
+.right_contents_link .img_right
+{
+    float: right;
+}
+
+.right_solution
+{
+
+    padding: 50px 0px;
+}
