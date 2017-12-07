@@ -242,6 +242,7 @@ function onExit()
 {
     pic.clear();
     gameStart();
+    gameScence.sureBt.button.visible = false;
 }
 
 //新游戏 参数 orders 表示阶数
@@ -250,6 +251,7 @@ function newGame(orders)
     beginScence.scence.visible = false;
     orderScence.scence.visible = false;
     instructionsScene.scence.visible = false;
+    
     gameScence.scence.visible = true;
     gameOverScence.scence.visible = false;
     
@@ -288,6 +290,7 @@ function gameWin()
     gameScence.pauseBt.button.visible = false;
     gameScence.exitBt.button.visible = false;
     gameScence.sureBt.button.visible = true;
+
 }
 
 //游戏失败
@@ -299,6 +302,7 @@ function gameOver()
     
     stage.addChild(gameOverScence.scence);
     gameOverScence.scence.visible = true;
+    
 }
 
 //每帧刷新
