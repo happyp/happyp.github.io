@@ -4,14 +4,15 @@
         <title>幽灵按钮</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/index.css">
-        
+        <script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
     </head>
     
     <body>
         <div class="box">
             <div class="link link-pause">
                 <p class="icon"></p>
-                    <a href="#" class="button">
+                    <a href="#" class="button" data_tip="I am a Button1">
                         <p class="line-top"></p>
                         <p class="line-bottom"></p>
                         <p class="line-left"></p>
@@ -22,7 +23,7 @@
             
              <div class="link link-paly">
                 <p class="icon"></p>
-                    <a href="#" class="button">
+                    <a href="#" class="button" data_tip="I am a Button2">
                         <p class="line-top"></p>
                         <p class="line-bottom"></p>
                         <p class="line-left"></p>
@@ -33,7 +34,7 @@
             
              <div class="link link-refresh">
                 <p class="icon"></p>
-                    <a href="#" class="button">
+                    <a href="#" class="button" data_tip="I am a Button3">
                         <p class="line-top"></p>
                         <p class="line-bottom"></p>
                         <p class="line-left"></p>
@@ -41,6 +42,11 @@
                         refresh
                     </a>
             </div>
+        </div>
+        
+        <div class="tip">
+            <em>1</em>
+            <span></span>
         </div>
     </body>
 </html>

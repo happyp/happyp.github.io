@@ -17,11 +17,12 @@
 .link
 {
     float: left;
+    width: 250px;
 }
 
 .link .button
 {
-    position: absolute;
+    position: relative;
     display: block;
     width: 180px;
     height:50px;
@@ -135,6 +136,43 @@
     height:100%;
     top: -2px;
 }
+
+
+.tip
+{
+    position: absolute;
+    height:35px;
+    line-height: 35px;
+    border-radius: 5px;
+    background: #f00;
+    padding: 0px 14px;
+    color:#fff;
+    top:50px;
+    opacity: 0;
+}
+
+.tip em
+{
+   background: #f00;
+}
+
+.tip span
+{
+    position: absolute;
+    border: 10px solid transparent;
+    border-top-color: #f00;
+    left: 50%;
+    margin-left: -10px;
+}
+
+
+
+
+
+
+
+
+
 
 
 
