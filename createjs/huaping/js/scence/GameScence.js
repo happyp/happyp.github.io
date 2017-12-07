@@ -34,13 +34,13 @@
             this.pauseBt = new Button("暂停",120,50);
             this.scence.addChild(this.pauseBt.button);
             this.pauseBt.button.x = stageWidth * 0.25 - this.pauseBt.width / 2;
-            this.pauseBt.button.y = stageHeight * 0.85;
+            this.pauseBt.button.y = stageHeight * 0.92;
 
             //退出
             this.exitBt = new Button("退出",120,50);
             this.scence.addChild(this.exitBt.button);
             this.exitBt.button.x = stageWidth * 0.75 - this.exitBt.width / 2;
-            this.exitBt.button.y = stageHeight * 0.85;
+            this.exitBt.button.y = stageHeight * 0.92;
             
             //确定  游戏结束后的 确定按钮
             this.sureBt = new Button("确     定",240,50);

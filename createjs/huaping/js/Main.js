@@ -3,10 +3,10 @@ var stage;
 var stageWidth;
 var stageHeight;
 //拼图宽度
-var picWidth = 550;
+var picWidth = 400;
 //拼图高度
-var picHeight = 550;
-var picX = 45;
+var picHeight = 400;
+var picX = 40;
 var picY = 100;
 
 //横向 纵向分成几份
@@ -16,13 +16,13 @@ var picSourceArr = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.j
 //大图片
 var pic;
 //小图宽
-var smallWidth = 250;
+var smallWidth = 200;
 //小图高
-var smallHeight = 250;
+var smallHeight = 200;
 //小图坐标 X
-var smallX = 195;
+var smallX = 140;
 //小图坐标 y
-var smallY = 700;
+var smallY = 520;
 //游戏纵时间数组  单位 秒
 var gameTimeArr = [200,240,140];
 //游戏总时间
@@ -278,6 +278,7 @@ function onRestGame()
     pic.gameOver();
     pic.clear();
     newGame(col);
+    gameOverScence.scence.visible = false;
 }
 
 //游戏胜利
