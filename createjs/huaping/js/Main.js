@@ -72,7 +72,7 @@ function init()
     
     progressText = new createjs.Text("progressText","30px Arial","#000");
     progressText.x = stageWidth / 2;
-    progressText.y = 350;
+    progressText.y = 250;
     progressText.textAlign="center";
     stage.addChild(progressText);
     
