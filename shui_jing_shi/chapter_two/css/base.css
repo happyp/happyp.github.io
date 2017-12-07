@@ -1,0 +1,301 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+html
+{
+    /*font-size: 625%;*/
+}
+
+body
+{
+    background: #fe9900 url(../images/main_bg.jpg) no-repeat center top;
+
+    font-size: 12px;
+}
+
+header
+{
+    width: 90%;
+    min-width: 960px;
+    margin: 0 auto;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.logo
+{
+    background: url(../images/main_site_logo.png) no-repeat left top;
+    width: 365px;
+    height: 71px;
+    padding: 0 20px;
+}
+
+.header_info
+{
+    padding: 0 20px;
+    margin: auto 20px;
+    overflow: hidden;
+}
+
+.header_info p
+{
+    color:#fff;
+    white-space: nowrap;
+}
+
+.header_phone
+{
+    padding-left: 45px;
+    background: url(../images/header_phone_icon.png) no-repeat left center;
+    line-height: 71px;
+    height:71px;
+    color:#fff;
+    white-space: nowrap;
+}
+
+.header-nav-bg
+{
+    background: url("../images/header_menu_bg.png") no-repeat top center;
+    /*background-size: cover;*/
+    min-width: 960px;
+    max-width: 2000px;
+    margin: 0 auto;
+    height: 106px;
+
+}
+
+.header-nav
+{
+    width: 960px;
+    height: auto;
+    margin: 0 auto;
+    padding-top: 26px;
+}
+
+.header-nav ul
+{
+    /*padding-left: ;*/
+    /*padding-top: ;*/
+
+    float: right;
+    display: block;
+}
+
+.header-nav li
+{
+    list-style-type: none;
+    float: left;
+}
+
+.header-nav a
+{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 30px 34px;
+    font-size: 12px;
+
+}
+
+.header-nav a:hover
+{
+    background: url(../images/header_menu_bg1.png) no-repeat center 4px;
+    padding: 30px 34px;
+    color:#fe9900;
+    font-weight: bold;
+}
+
+
+
+/*----------------尾部------------------------------*/
+.footer
+{
+    /*height:600px;*/
+    background: #1b1b1b;
+
+}
+
+.footer .container
+{
+    width: 960px;
+    margin: 0 auto;
+}
+
+.footer .footer_menu
+{
+
+    padding: 20px 0px;
+    border-bottom: 1px solid #000;
+    overflow: hidden;
+}
+
+
+
+.footer .out_li
+{
+    list-style-type: none;
+    float: left;
+    width: 192px;
+    color: #333;
+}
+
+.footer .out_li li
+{
+    list-style-type: none;
+}
+
+.footer .li_title
+{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
+
+.footer .li_table a
+{
+    display: block;
+    text-decoration: none;
+    padding: 10px 0px;
+    padding-left: 20px;
+    background: url(../images/sitemap_nodes_icon_333.png) no-repeat center left;
+    color: #333;
+}
+
+.footer .li_table a:hover
+{
+    background: url(../images/sitemap_nodes_icon_hover.png) no-repeat center left;
+    color: #fe9900;
+}
+
+.footer_info
+{
+    width: 960px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+
+    color: #333;
+}
+
+.footer_info p,img
+{
+    display: inline-block;
+    padding: 0 10px;
+}
+
+.footer_info .first
+{
+    padding-left: 0px;
+}
+
+.lines
+{
+    border-right: 1px solid #333;
+}
+
+.footer_news
+{
+    width: 960px;
+    padding-top: 40px;
+
+    color: #333;
+}
+
+
+
+.footer_news .link
+{
+    padding-right: 5px;
+
+}
+
+.footer_news .news
+{
+
+    padding: 20px 0px;
+    width: 960px;
+}
+
+.footer_news .news ul
+{
+
+    width: 960px;
+}
+
+.footer_news .news li
+{
+    list-style-type: none;
+    display: inline;
+}
+
+.footer_news a
+{
+    text-decoration: none;
+    color: #333;
+    padding-right: 20px;
+    background: url(../images/out_link_icon_333.png) no-repeat center right;
+
+}
+
+.footer_news a:hover
+{
+
+    color: #fe9900;
+
+    background: url(../images/out_link_icon_hover.png) no-repeat center right;
+
+
+}
+
+.clear
+{
+
+}
+
+
+
+/*=============主体===================*/
+
+.info_bt
+{
+    padding: 20px 0px;
+}
+
+.info_bt ul
+{
+    overflow: hidden;
+}
+
+.info_bt li
+{
+    display: block;
+    width: 232px;
+    height: 52px;
+    background: url("../images/pages_button_bg.png") no-repeat center left;
+    color: #fff;
+    font-weight: bold;
+    float: left;
+}
+
+.info_bt li:hover
+{
+    background: url("../images/pages_button_bg_hover.png") no-repeat center left;
+    color:#fe9900;
+}
+
+
+.info_bt li p
+{
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.info_bt li span
+{
+    padding-left: 15px;
+}
+
