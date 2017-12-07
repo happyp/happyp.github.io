@@ -1,0 +1,142 @@
+*
+{
+    margin: 0px;
+    padding: 0px;
+    background: #ccc;
+}
+
+
+
+.box
+{
+    width:1000px;
+    height:300px;
+    margin: 0px auto;
+    
+}
+.link
+{
+    float: left;
+}
+
+.link .button
+{
+    position: absolute;
+    display: block;
+    width: 180px;
+    height:50px;
+    border: 2px solid rgba(255,255,255,0.5);
+    line-height: 46px;
+    padding-left: 30px;
+    text-decoration: none;
+    color: #339900;
+    box-sizing: border-box;
+    background: url(../images/arrow.png) no-repeat 120px center;
+    
+    transition: 0.3s ease;
+}
+
+
+
+.link .button:hover
+{
+    border: 2px solid rgba(255,255,255,1);
+    background: url(../images/arrow.png) no-repeat 140px center
+}
+
+.link .icon
+{
+    width:180px;
+    height:150px;
+    transition: 0.5s ease;
+}
+
+.link .icon:hover
+{
+    transform: rotate(360deg) scale(1.1);
+}
+
+
+
+.link-pause .icon
+{    
+    background: url(../images/btn_pause.png) no-repeat center center 
+}
+
+.link-paly .icon
+{    
+    background: url(../images/btn_play.png) no-repeat center center 
+}
+
+.link-refresh .icon
+{    
+    background: url(../images/btn_refresh.png) no-repeat center center 
+}
+
+.button p
+{
+    position: absolute;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+.button .line-top
+{
+    width:0px;
+    height:2px;
+    left:-100px;
+    top:-2px;
+}
+
+.button:hover .line-top
+{
+    width:100%;
+    left: 0px;
+}
+
+.button .line-bottom
+{
+    width:0px;
+    height:2px;
+    left:280px;
+    top:46px;
+}
+
+.button:hover .line-bottom
+{
+    width:100%;
+    left: 0px;
+}
+
+.button .line-left
+{
+    width:2px;
+    height:0px;
+    left:-2px;
+    top:150px;
+}
+
+.button:hover .line-left
+{
+    height:100%;
+    top: -2px;
+}
+
+.button .line-right
+{
+    width:2px;
+    height:0px;
+    left: 176px;
+    top: -100px;
+}
+
+.button:hover .line-right
+{
+    height:100%;
+    top: -2px;
+}
+
+
+
+
+
