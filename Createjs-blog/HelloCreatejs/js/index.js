@@ -27,7 +27,7 @@ function initGame()
     //这里的颜色 是一种CSS中设置的颜色,也就是说CSS中怎么设置颜色 这么就怎么设置 
     // "#ff000"  "rgb(255,0,0)"  "rgba(255,0,0,0.2)"  "red"
     //但需要注意的是 必须要用引号括起来
-    circleShape.graphics.beginFill("red");
+    circleShape.graphics.beginFill("#00ff00");
     //绘制圆形图像  在坐标点(0,0) 绘制半径为50的圆
     circleShape.graphics.drawCircle(0,0,50);
     //结束绘制
