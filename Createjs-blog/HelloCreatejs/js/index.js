@@ -24,7 +24,7 @@ function initGame()
     circleShape = new createjs.Shape();
     
     //为圆形图像设置填充颜色
-    //这里的颜色 是一种CSS中设置的颜色,也就是说CSS中怎么设置颜色 这么就怎么设置 
+    //这里的颜色 是一种CSS中设置的颜色,也就是说CSS中怎么设置颜色 这就怎么设置 
     // "#ff000"  "rgb(255,0,0)"  "rgba(255,0,0,0.2)"  "red"
     //但需要注意的是 必须要用引号括起来
     circleShape.graphics.beginFill("#00ff00");
@@ -44,7 +44,7 @@ function initGame()
 }
 
 
-
+var stage = new createjs.Stage("Game");
 
 
 
