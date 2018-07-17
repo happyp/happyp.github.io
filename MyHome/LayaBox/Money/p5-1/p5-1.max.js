@@ -15904,8 +15904,9 @@ var Main=(function(_super){
 
 	/**加载完成*/
 	__proto.onComplete=function(){
-		console.log("加载完成")
+		Laya.stage.removeChild(this.progress);
 		var main=new MainUIUI();
+		Laya.stage.addChild(main);
 	}
 
 	return Main;
