@@ -15838,7 +15838,7 @@ var Main=(function(_super){
 		var arr=[];
 		arr.push("image/main_bg.png");
 		arr.push("image/tip.png");
-		for (i=1;i <=43;i++){
+		for (i=1;i <=12;i++){
 			if (i < 10){
 				arr.push("page1/未命名-1000"+i+".png");
 			}
@@ -15846,7 +15846,7 @@ var Main=(function(_super){
 				arr.push("page1/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=41;i++){
+		for (i=1;i <=34;i++){
 			if (i < 10){
 				arr.push("page2/未命名-1000"+i+".png");
 			}
@@ -15854,7 +15854,7 @@ var Main=(function(_super){
 				arr.push("page2/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=48;i++){
+		for (i=1;i <=25;i++){
 			if (i < 10){
 				arr.push("page3/未命名-1000"+i+".png");
 			}
@@ -15862,7 +15862,7 @@ var Main=(function(_super){
 				arr.push("page3/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=58;i++){
+		for (i=1;i <=25;i++){
 			if (i < 10){
 				arr.push("page4/未命名-1000"+i+".png");
 			}
@@ -15878,7 +15878,7 @@ var Main=(function(_super){
 				arr.push("page5/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=62;i++){
+		for (i=1;i <=30;i++){
 			if (i < 10){
 				arr.push("page6/未命名-1000"+i+".png");
 			}
@@ -28853,19 +28853,19 @@ var MainUIUI=(function(_super){
 		switch(e.currentTarget.name){
 			case "img_btn1":
 				this.page.pageType=1;
-				this.page.total=43;
+				this.page.total=12;
 				break ;
 			case "img_btn2":
 				this.page.pageType=2;
-				this.page.total=41;
+				this.page.total=34;
 				break ;
 			case "img_btn3":
 				this.page.pageType=3;
-				this.page.total=48;
+				this.page.total=25;
 				break ;
 			case "img_btn4":
 				this.page.pageType=4;
-				this.page.total=58;
+				this.page.total=25;
 				break ;
 			case "img_btn5":
 				this.page.pageType=5;
@@ -28873,7 +28873,7 @@ var MainUIUI=(function(_super){
 				break ;
 			case "img_btn6":
 				this.page.pageType=6;
-				this.page.total=62
+				this.page.total=30
 				break ;
 			}
 		this.page.init();
