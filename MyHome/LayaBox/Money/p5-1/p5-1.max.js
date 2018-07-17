@@ -15827,7 +15827,7 @@ var Main=(function(_super){
 		Laya.init(1920,1080);
 		Laya.stage.bgColor="#000";
 		this.progress=new ProgressView();
-		this.addChild(this.progress);
+		Laya.stage.addChild(this.progress);
 		this.loadAsset();
 	}
 
@@ -15904,9 +15904,8 @@ var Main=(function(_super){
 
 	/**加载完成*/
 	__proto.onComplete=function(){
-		this.removeChild(this.progress);
+		console.log("加载完成")
 		var main=new MainUIUI();
-		Laya.stage.addChild(main);
 	}
 
 	return Main;
@@ -28283,7 +28282,7 @@ var ProgressViewUI=(function(_super){
 	}
 
 	__static(ProgressViewUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"y":0,"x":0,"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#D7F6F6"}},{"type":"Label","props":{"y":500,"x":875,"var":"load_txt","text":"label","fontSize":80}}]};}
+	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"y":0,"x":0,"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#D7F6F6"}},{"type":"Label","props":{"y":500,"x":860,"width":200,"var":"load_txt","text":"0%","fontSize":80,"color":"#000000","align":"center"}}]};}
 	]);
 	return ProgressViewUI;
 })(View)
@@ -28822,13 +28821,14 @@ var MainUIUI=(function(_super){
 		this.yy=818;
 		MainUIUI.__super.call(this);
 		this.dragRect=new Rectangle(0,0,1920,1080);
-		this.page=new Page1();
+		this.page
 		this.tip_img.visible=false;
 		this.question_btn.on("click",this,this.onTipShow);
 		for (var i=1;i <=6;i++){
 			this["img_btn"+i].on("click",this,this.onImagePlay);
 		}
 		this.xiao_img.on("mousedown",this,this.onDragXiao);
+		this.page=new Page1();
 		this.addChild(this.page);
 		this.page.visible=false;
 		this.addChild(this.question_btn);
