@@ -418,22 +418,6 @@ var ___Laya=(function(){
 
 
 /**
-*...
-*@author HappyKing
-*/
-//class com.Maths
-var Maths=(function(){
-	function Maths(){}
-	__class(Maths,'com.Maths');
-	Maths.dis=function(xx1,yy1,xx2,yy2){
-		return Math.sqrt(Math.pow(xx1-xx2,2)+Math.pow(yy1-yy2,2));
-	}
-
-	return Maths;
-})()
-
-
-/**
 *<code>EventDispatcher</code> 类是可调度事件的所有类的基类。
 */
 //class laya.events.EventDispatcher
@@ -731,6 +715,22 @@ var Handler=(function(){
 	Handler._pool=[];
 	Handler._gid=1;
 	return Handler;
+})()
+
+
+/**
+*...
+*@author HappyKing
+*/
+//class com.Maths
+var Maths=(function(){
+	function Maths(){}
+	__class(Maths,'com.Maths');
+	Maths.dis=function(xx1,yy1,xx2,yy2){
+		return Math.sqrt(Math.pow(xx1-xx2,2)+Math.pow(yy1-yy2,2));
+	}
+
+	return Maths;
 })()
 
 
@@ -6973,575 +6973,6 @@ var Browser=(function(){
 	}
 
 	return Browser;
-})()
-
-
-/**
-*<p> <code>Byte</code> 类提供用于优化读取、写入以及处理二进制数据的方法和属性。</p>
-*<p><b>注意：</b> <code>Byte</code> 类适用于需要在字节层访问数据的高级开发人员。</p>
-*/
-//class laya.utils.Byte
-var Byte=(function(){
-	function Byte(data){
-		/**
-		*@private
-		*是否为小端数据。
-		*/
-		this._xd_=true;
-		this._allocated_=8;
-		/**
-		*@private
-		*原始数据。
-		*/
-		//this._d_=null;
-		/**
-		*@private
-		*DataView
-		*/
-		//this._u8d_=null;
-		/**@private */
-		this._pos_=0;
-		/**@private */
-		this._length=0;
-		if (data){
-			this._u8d_=new Uint8Array(data);
-			this._d_=new DataView(this._u8d_.buffer);
-			this._length=this._d_.byteLength;
-			}else {
-			this.___resizeBuffer(this._allocated_);
-		}
-	}
-
-	__class(Byte,'laya.utils.Byte');
-	var __proto=Byte.prototype;
-	/**@private */
-	__proto.___resizeBuffer=function(len){
-		try {
-			var newByteView=new Uint8Array(len);
-			if (this._u8d_ !=null){
-				if (this._u8d_.length <=len)newByteView.set(this._u8d_);
-				else newByteView.set(this._u8d_.subarray(0,len));
-			}
-			this._u8d_=newByteView;
-			this._d_=new DataView(newByteView.buffer);
-			}catch (err){
-			throw "___resizeBuffer err:"+len;
-		}
-	}
-
-	/**
-	*<p>常用于解析固定格式的字节流。</p>
-	*<p>先从字节流的当前字节偏移位置处读取一个 <code>Uint16</code> 值，然后以此值为长度，读取此长度的字符串。</p>
-	*@return 读取的字符串。
-	*/
-	__proto.getString=function(){
-		return this.rUTF(this.getUint16());
-	}
-
-	/**
-	*从字节流中 <code>start</code> 参数指定的位置开始，读取 <code>len</code> 参数指定的字节数的数据，用于创建一个 <code>Float32Array</code> 对象并返回此对象。
-	*@param start 开始位置。
-	*@param len 需要读取的字节长度。如果要读取的长度超过可读取范围，则只返回可读范围内的值。
-	*@return 读取的 Float32Array 对象。
-	*/
-	__proto.getFloat32Array=function(start,len){
-		var end=start+len;
-		end=(end > this._length)? this._length :end;
-		var v=new Float32Array(this._d_.buffer.slice(start,end));
-		this._pos_=end;
-		return v;
-	}
-
-	/**
-	*从字节流中 <code>start</code> 参数指定的位置开始，读取 <code>len</code> 参数指定的字节数的数据，用于创建一个 <code>Uint8Array</code> 对象并返回此对象。
-	*@param start 开始位置。
-	*@param len 需要读取的字节长度。如果要读取的长度超过可读取范围，则只返回可读范围内的值。
-	*@return 读取的 Uint8Array 对象。
-	*/
-	__proto.getUint8Array=function(start,len){
-		var end=start+len;
-		end=(end > this._length)? this._length :end;
-		var v=new Uint8Array(this._d_.buffer.slice(start,end));
-		this._pos_=end;
-		return v;
-	}
-
-	/**
-	*从字节流中 <code>start</code> 参数指定的位置开始，读取 <code>len</code> 参数指定的字节数的数据，用于创建一个 <code>Int16Array</code> 对象并返回此对象。
-	*@param start 开始读取的字节偏移量位置。
-	*@param len 需要读取的字节长度。如果要读取的长度超过可读取范围，则只返回可读范围内的值。
-	*@return 读取的 Uint8Array 对象。
-	*/
-	__proto.getInt16Array=function(start,len){
-		var end=start+len;
-		end=(end > this._length)? this._length :end;
-		var v=new Int16Array(this._d_.buffer.slice(start,end));
-		this._pos_=end;
-		return v;
-	}
-
-	/**
-	*从字节流的当前字节偏移位置处读取一个 IEEE 754 单精度（32 位）浮点数。
-	*@return 单精度（32 位）浮点数。
-	*/
-	__proto.getFloat32=function(){
-		if (this._pos_+4 > this._length)throw "getFloat32 error - Out of bounds";
-		var v=this._d_.getFloat32(this._pos_,this._xd_);
-		this._pos_+=4;
-		return v;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 IEEE 754 双精度（64 位）浮点数。
-	*@return 双精度（64 位）浮点数。
-	*/
-	__proto.getFloat64=function(){
-		if (this._pos_+8 > this._length)throw "getFloat64 error - Out of bounds";
-		var v=this._d_.getFloat64(this._pos_,this._xd_);
-		this._pos_+=8;
-		return v;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入一个 IEEE 754 单精度（32 位）浮点数。
-	*@param value 单精度（32 位）浮点数。
-	*/
-	__proto.writeFloat32=function(value){
-		this.ensureWrite(this._pos_+4);
-		this._d_.setFloat32(this._pos_,value,this._xd_);
-		this._pos_+=4;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入一个 IEEE 754 双精度（64 位）浮点数。
-	*@param value 双精度（64 位）浮点数。
-	*/
-	__proto.writeFloat64=function(value){
-		this.ensureWrite(this._pos_+8);
-		this._d_.setFloat64(this._pos_,value,this._xd_);
-		this._pos_+=8;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 Int32 值。
-	*@return Int32 值。
-	*/
-	__proto.getInt32=function(){
-		if (this._pos_+4 > this._length)throw "getInt32 error - Out of bounds";
-		var float=this._d_.getInt32(this._pos_,this._xd_);
-		this._pos_+=4;
-		return float;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 Uint32 值。
-	*@return Uint32 值。
-	*/
-	__proto.getUint32=function(){
-		if (this._pos_+4 > this._length)throw "getUint32 error - Out of bounds";
-		var v=this._d_.getUint32(this._pos_,this._xd_);
-		this._pos_+=4;
-		return v;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入指定的 Int32 值。
-	*@param value 需要写入的 Int32 值。
-	*/
-	__proto.writeInt32=function(value){
-		this.ensureWrite(this._pos_+4);
-		this._d_.setInt32(this._pos_,value,this._xd_);
-		this._pos_+=4;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入 Uint32 值。
-	*@param value 需要写入的 Uint32 值。
-	*/
-	__proto.writeUint32=function(value){
-		this.ensureWrite(this._pos_+4);
-		this._d_.setUint32(this._pos_,value,this._xd_);
-		this._pos_+=4;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 Int16 值。
-	*@return Int16 值。
-	*/
-	__proto.getInt16=function(){
-		if (this._pos_+2 > this._length)throw "getInt16 error - Out of bounds";
-		var us=this._d_.getInt16(this._pos_,this._xd_);
-		this._pos_+=2;
-		return us;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 Uint16 值。
-	*@return Uint16 值。
-	*/
-	__proto.getUint16=function(){
-		if (this._pos_+2 > this._length)throw "getUint16 error - Out of bounds";
-		var us=this._d_.getUint16(this._pos_,this._xd_);
-		this._pos_+=2;
-		return us;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入指定的 Uint16 值。
-	*@param value 需要写入的Uint16 值。
-	*/
-	__proto.writeUint16=function(value){
-		this.ensureWrite(this._pos_+2);
-		this._d_.setUint16(this._pos_,value,this._xd_);
-		this._pos_+=2;
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入指定的 Int16 值。
-	*@param value 需要写入的 Int16 值。
-	*/
-	__proto.writeInt16=function(value){
-		this.ensureWrite(this._pos_+2);
-		this._d_.setInt16(this._pos_,value,this._xd_);
-		this._pos_+=2;
-	}
-
-	/**
-	*从字节流的当前字节偏移量位置处读取一个 Uint8 值。
-	*@return Uint8 值。
-	*/
-	__proto.getUint8=function(){
-		if (this._pos_+1 > this._length)throw "getUint8 error - Out of bounds";
-		return this._d_.getUint8(this._pos_++);
-	}
-
-	/**
-	*在字节流的当前字节偏移量位置处写入指定的 Uint8 值。
-	*@param value 需要写入的 Uint8 值。
-	*/
-	__proto.writeUint8=function(value){
-		this.ensureWrite(this._pos_+1);
-		this._d_.setUint8(this._pos_,value);
-		this._pos_++;
-	}
-
-	/**
-	*@private
-	*从字节流的指定字节偏移量位置处读取一个 Uint8 值。
-	*@param pos 字节读取位置。
-	*@return Uint8 值。
-	*/
-	__proto._getUInt8=function(pos){
-		return this._d_.getUint8(pos);
-	}
-
-	/**
-	*@private
-	*从字节流的指定字节偏移量位置处读取一个 Uint16 值。
-	*@param pos 字节读取位置。
-	*@return Uint16 值。
-	*/
-	__proto._getUint16=function(pos){
-		return this._d_.getUint16(pos,this._xd_);
-	}
-
-	/**
-	*@private
-	*使用 getFloat32()读取6个值，用于创建并返回一个 Matrix 对象。
-	*@return Matrix 对象。
-	*/
-	__proto._getMatrix=function(){
-		var rst=new Matrix(this.getFloat32(),this.getFloat32(),this.getFloat32(),this.getFloat32(),this.getFloat32(),this.getFloat32());
-		return rst;
-	}
-
-	/**
-	*@private
-	*读取指定长度的 UTF 型字符串。
-	*@param len 需要读取的长度。
-	*@return 读取的字符串。
-	*/
-	__proto.rUTF=function(len){
-		var v="",max=this._pos_+len,c=0,c2=0,c3=0,f=String.fromCharCode;
-		var u=this._u8d_,i=0;
-		while (this._pos_ < max){
-			c=u[this._pos_++];
-			if (c < 0x80){
-				if (c !=0){
-					v+=f(c);
-				}
-				}else if (c < 0xE0){
-				v+=f(((c & 0x3F)<< 6)| (u[this._pos_++] & 0x7F));
-				}else if (c < 0xF0){
-				c2=u[this._pos_++];
-				v+=f(((c & 0x1F)<< 12)| ((c2 & 0x7F)<< 6)| (u[this._pos_++] & 0x7F));
-				}else {
-				c2=u[this._pos_++];
-				c3=u[this._pos_++];
-				v+=f(((c & 0x0F)<< 18)| ((c2 & 0x7F)<< 12)| ((c3 << 6)& 0x7F)| (u[this._pos_++] & 0x7F));
-			}
-			i++;
-		}
-		return v;
-	}
-
-	/**
-	*@private
-	*读取 <code>len</code> 参数指定的长度的字符串。
-	*@param len 要读取的字符串的长度。
-	*@return 指定长度的字符串。
-	*/
-	__proto.getCustomString=function(len){
-		var v="",ulen=0,c=0,c2=0,f=String.fromCharCode;
-		var u=this._u8d_,i=0;
-		while (len > 0){
-			c=u[this._pos_];
-			if (c < 0x80){
-				v+=f(c);
-				this._pos_++;
-				len--;
-				}else {
-				ulen=c-0x80;
-				this._pos_++;
-				len-=ulen;
-				while (ulen > 0){
-					c=u[this._pos_++];
-					c2=u[this._pos_++];
-					v+=f((c2 << 8)| c);
-					ulen--;
-				}
-			}
-		}
-		return v;
-	}
-
-	/**
-	*清除字节数组的内容，并将 length 和 pos 属性重置为 0。调用此方法将释放 Byte 实例占用的内存。
-	*/
-	__proto.clear=function(){
-		this._pos_=0;
-		this.length=0;
-	}
-
-	/**
-	*@private
-	*获取此对象的 ArrayBuffer 引用。
-	*@return
-	*/
-	__proto.__getBuffer=function(){
-		return this._d_.buffer;
-	}
-
-	/**
-	*<p>将 UTF-8 字符串写入字节流。类似于 writeUTF()方法，但 writeUTFBytes()不使用 16 位长度的字为字符串添加前缀。</p>
-	*<p>对应的读取方法为： getUTFBytes 。</p>
-	*@param value 要写入的字符串。
-	*/
-	__proto.writeUTFBytes=function(value){
-		value=value+"";
-		for (var i=0,sz=value.length;i < sz;i++){
-			var c=value.charCodeAt(i);
-			if (c <=0x7F){
-				this.writeByte(c);
-				}else if (c <=0x7FF){
-				this.ensureWrite(this._pos_+2);
-				this._u8d_.set([0xC0 | (c >> 6),0x80 | (c & 0x3F)],this._pos_);
-				this._pos_+=2;
-				}else if (c <=0xFFFF){
-				this.ensureWrite(this._pos_+3);
-				this._u8d_.set([0xE0 | (c >> 12),0x80 | ((c >> 6)& 0x3F),0x80 | (c & 0x3F)],this._pos_);
-				this._pos_+=3;
-				}else {
-				this.ensureWrite(this._pos_+4);
-				this._u8d_.set([0xF0 | (c >> 18),0x80 | ((c >> 12)& 0x3F),0x80 | ((c >> 6)& 0x3F),0x80 | (c & 0x3F)],this._pos_);
-				this._pos_+=4;
-			}
-		}
-	}
-
-	/**
-	*<p>将 UTF-8 字符串写入字节流。先写入以字节表示的 UTF-8 字符串长度（作为 16 位整数），然后写入表示字符串字符的字节。</p>
-	*<p>对应的读取方法为： getUTFString 。</p>
-	*@param value 要写入的字符串值。
-	*/
-	__proto.writeUTFString=function(value){
-		var tPos=this.pos;
-		this.writeUint16(1);
-		this.writeUTFBytes(value);
-		var dPos=this.pos-tPos-2;
-		if (dPos >=65536){
-			throw "writeUTFString byte len more than 65536";
-		}
-		this._d_.setUint16(tPos,dPos,this._xd_);
-	}
-
-	/**
-	*@private
-	*读取 UTF-8 字符串。
-	*@return 读取的字符串。
-	*/
-	__proto.readUTFString=function(){
-		return this.readUTFBytes(this.getUint16());
-	}
-
-	/**
-	*<p>从字节流中读取一个 UTF-8 字符串。假定字符串的前缀是一个无符号的短整型（以此字节表示要读取的长度）。</p>
-	*<p>对应的写入方法为： writeUTFString 。</p>
-	*@return 读取的字符串。
-	*/
-	__proto.getUTFString=function(){
-		return this.readUTFString();
-	}
-
-	/**
-	*@private
-	*读字符串，必须是 writeUTFBytes 方法写入的字符串。
-	*@param len 要读的buffer长度，默认将读取缓冲区全部数据。
-	*@return 读取的字符串。
-	*/
-	__proto.readUTFBytes=function(len){
-		(len===void 0)&& (len=-1);
-		if (len==0)return "";
-		var lastBytes=this.bytesAvailable;
-		if (len > lastBytes)throw "readUTFBytes error - Out of bounds";
-		len=len > 0 ? len :lastBytes;
-		return this.rUTF(len);
-	}
-
-	/**
-	*<p>从字节流中读取一个由 length 参数指定的长度的 UTF-8 字节序列，并返回一个字符串。</p>
-	*<p>一般读取的是由 writeUTFBytes 方法写入的字符串。</p>
-	*@param len 要读的buffer长度，默认将读取缓冲区全部数据。
-	*@return 读取的字符串。
-	*/
-	__proto.getUTFBytes=function(len){
-		(len===void 0)&& (len=-1);
-		return this.readUTFBytes(len);
-	}
-
-	/**
-	*<p>在字节流中写入一个字节。</p>
-	*<p>使用参数的低 8 位。忽略高 24 位。</p>
-	*@param value
-	*/
-	__proto.writeByte=function(value){
-		this.ensureWrite(this._pos_+1);
-		this._d_.setInt8(this._pos_,value);
-		this._pos_+=1;
-	}
-
-	/**
-	*@private
-	*从字节流中读取带符号的字节。
-	*/
-	__proto.readByte=function(){
-		if (this._pos_+1 > this._length)throw "readByte error - Out of bounds";
-		return this._d_.getInt8(this._pos_++);
-	}
-
-	/**
-	*<p>从字节流中读取带符号的字节。</p>
-	*<p>返回值的范围是从-128 到 127。</p>
-	*@return 介于-128 和 127 之间的整数。
-	*/
-	__proto.getByte=function(){
-		return this.readByte();
-	}
-
-	/**
-	*<p>保证该字节流的可用长度不小于 <code>lengthToEnsure</code> 参数指定的值。</p>
-	*@param lengthToEnsure 指定的长度。
-	*/
-	__proto.ensureWrite=function(lengthToEnsure){
-		if (this._length < lengthToEnsure)this._length=lengthToEnsure;
-		if (this._allocated_ < lengthToEnsure)this.length=lengthToEnsure;
-	}
-
-	/**
-	*<p>将指定 arraybuffer 对象中的以 offset 为起始偏移量， length 为长度的字节序列写入字节流。</p>
-	*<p>如果省略 length 参数，则使用默认长度 0，该方法将从 offset 开始写入整个缓冲区；如果还省略了 offset 参数，则写入整个缓冲区。</p>
-	*<p>如果 offset 或 length 小于0，本函数将抛出异常。</p>
-	*$NEXTBIG 由于没有判断length和arraybuffer的合法性，当开发者填写了错误的length值时，会导致写入多余的空白数据甚至内存溢出，为了避免影响开发者正在使用此方法的功能，下个重大版本会修复这些问题。
-	*@param arraybuffer 需要写入的 Arraybuffer 对象。
-	*@param offset Arraybuffer 对象的索引的偏移量（以字节为单位）
-	*@param length 从 Arraybuffer 对象写入到 Byte 对象的长度（以字节为单位）
-	*/
-	__proto.writeArrayBuffer=function(arraybuffer,offset,length){
-		(offset===void 0)&& (offset=0);
-		(length===void 0)&& (length=0);
-		if (offset < 0 || length < 0)throw "writeArrayBuffer error - Out of bounds";
-		if (length==0)length=arraybuffer.byteLength-offset;
-		this.ensureWrite(this._pos_+length);
-		var uint8array=new Uint8Array(arraybuffer);
-		this._u8d_.set(uint8array.subarray(offset,offset+length),this._pos_);
-		this._pos_+=length;
-	}
-
-	/**
-	*获取此对象的 ArrayBuffer 数据，数据只包含有效数据部分。
-	*/
-	__getset(0,__proto,'buffer',function(){
-		var rstBuffer=this._d_.buffer;
-		if (rstBuffer.byteLength==this.length)return rstBuffer;
-		return rstBuffer.slice(0,this.length);
-	});
-
-	/**
-	*<p> <code>Byte</code> 实例的字节序。取值为：<code>BIG_ENDIAN</code> 或 <code>BIG_ENDIAN</code> 。</p>
-	*<p>主机字节序，是 CPU 存放数据的两种不同顺序，包括小端字节序和大端字节序。通过 <code>getSystemEndian</code> 可以获取当前系统的字节序。</p>
-	*<p> <code>BIG_ENDIAN</code> ：大端字节序，地址低位存储值的高位，地址高位存储值的低位。有时也称之为网络字节序。<br/>
-	*<code>LITTLE_ENDIAN</code> ：小端字节序，地址低位存储值的低位，地址高位存储值的高位。</p>
-	*/
-	__getset(0,__proto,'endian',function(){
-		return this._xd_ ? "littleEndian" :"bigEndian";
-		},function(endianStr){
-		this._xd_=(endianStr=="littleEndian");
-	});
-
-	/**
-	*<p> <code>Byte</code> 对象的长度（以字节为单位）。</p>
-	*<p>如果将长度设置为大于当前长度的值，则用零填充字节数组的右侧；如果将长度设置为小于当前长度的值，将会截断该字节数组。</p>
-	*<p>如果要设置的长度大于当前已分配的内存空间的字节长度，则重新分配内存空间，大小为以下两者较大者：要设置的长度、当前已分配的长度的2倍，并将原有数据拷贝到新的内存空间中；如果要设置的长度小于当前已分配的内存空间的字节长度，也会重新分配内存空间，大小为要设置的长度，并将原有数据从头截断为要设置的长度存入新的内存空间中。</p>
-	*/
-	__getset(0,__proto,'length',function(){
-		return this._length;
-		},function(value){
-		if (this._allocated_ < value)
-			this.___resizeBuffer(this._allocated_=Math.floor(Math.max(value,this._allocated_ *2)));
-		else if (this._allocated_ > value)
-		this.___resizeBuffer(this._allocated_=value);
-		this._length=value;
-	});
-
-	/**
-	*移动或返回 Byte 对象的读写指针的当前位置（以字节为单位）。下一次调用读取方法时将在此位置开始读取，或者下一次调用写入方法时将在此位置开始写入。
-	*/
-	__getset(0,__proto,'pos',function(){
-		return this._pos_;
-		},function(value){
-		this._pos_=value;
-	});
-
-	/**
-	*可从字节流的当前位置到末尾读取的数据的字节数。
-	*/
-	__getset(0,__proto,'bytesAvailable',function(){
-		return this._length-this._pos_;
-	});
-
-	Byte.getSystemEndian=function(){
-		if (!Byte._sysEndian){
-			var buffer=new ArrayBuffer(2);
-			new DataView(buffer).setInt16(0,256,true);
-			Byte._sysEndian=(new Int16Array(buffer))[0]===256 ? "littleEndian" :"bigEndian";
-		}
-		return Byte._sysEndian;
-	}
-
-	Byte.BIG_ENDIAN="bigEndian";
-	Byte.LITTLE_ENDIAN="littleEndian";
-	Byte._sysEndian=null;
-	return Byte;
 })()
 
 
@@ -15815,6 +15246,155 @@ var WebAudioSoundChannel=(function(_super){
 
 
 /**
+*播放动画的页面
+*
+*@author Happyking
+*/
+//class com.AnimationPage extends laya.display.Sprite
+var AnimationPage=(function(_super){
+	function AnimationPage(loop,bgColor){
+		/**是否循环播放*/
+		this.loop=false;
+		/**绘制动画的图像*/
+		this.roleAni=null;
+		this.bg=null;
+		this.bgColor="#fff";
+		/**播放结束是否关闭整个页面*/
+		this.isOverClose=false;
+		this.aniWidth=0;
+		this.aniHeight=0;
+		this.index=0;
+		/**种类*/
+		this.pageType="";
+		/**总长度*/
+		this.total=10;
+		AnimationPage.__super.call(this);
+		(loop===void 0)&& (loop=false);
+		(bgColor===void 0)&& (bgColor="#fff");
+		this.bgColor=bgColor;
+		this.bg=new Sprite();
+		this.bg.graphics.drawRect(0,0,1920,1080,bgColor);
+		this.bg.width=1920;
+		this.bg.height=1080
+		this.addChild(this.bg);
+		this.loop=loop;
+		this.roleAni=new Image();
+		this.addChild(this.roleAni);
+		this.bg.on("click",this,this.onBack);
+	}
+
+	__class(AnimationPage,'com.AnimationPage',_super);
+	var __proto=AnimationPage.prototype;
+	/**设置背景颜色*/
+	__proto.setBgColor=function(color){
+		this.bg.graphics.clear();
+		this.bg.graphics.drawRect(0,0,1920,1080,color);
+	}
+
+	/**
+	*设置背景颜色
+	*@param imgPath 图片路径
+	*/
+	__proto.setBgImage=function(imgPath){
+		this.bg.graphics.clear();
+		this.bg.graphics.loadImage(imgPath,0,0);
+	}
+
+	/**
+	*设置动画
+	*@param pageType 动画atlas的路径
+	*/
+	__proto.setAni=function(pageType,aniWidth,aniHeight){
+		(aniWidth===void 0)&& (aniWidth=0);
+		(aniHeight===void 0)&& (aniHeight=0);
+		this.roleAni.skin="";
+		this.pageType=pageType;
+		this.aniWidth=aniWidth;
+		this.aniHeight=aniHeight;
+		this.roleAni.x=(Laya.stage.width-aniWidth)/ 2;
+		this.roleAni.y=(Laya.stage.height-aniHeight)/ 2;
+		this.index=1;
+		Laya.timer.loop(50,this,this.onAnimation);
+	}
+
+	/**播放动画*/
+	__proto.onAnimation=function(){
+		this.index++;
+		if (this.index < 10){
+			this.roleAni.skin=this.pageType+"000"+this.index+".png"
+		}
+		else{
+			this.roleAni.skin=this.pageType+"00"+this.index+".png"
+		}
+		if (this.index >=this.total){
+			this.onComplete();
+			if (this.loop){
+				this.index=1;
+			}
+			else{
+				Laya.timer.clear(this,this.onAnimation);
+			}
+		}
+	}
+
+	/**动画播放完毕*/
+	__proto.onComplete=function(){
+		console.log("播放完毕")
+		if (this.isOverClose){
+			this.visible=false;
+		}
+	}
+
+	/**返回*/
+	__proto.onBack=function(e){
+		console.log("ddddd")
+		this.off("mousedown",this ,this.onBack);
+		Laya.timer.clear(this,this.onAnimation);
+		this.visible=false;
+		SoundManager.stopAll();
+	}
+
+	return AnimationPage;
+})(Sprite)
+
+
+/**
+*加载进度
+*@author Happyking
+*/
+//class com.ProgressView extends laya.display.Sprite
+var ProgressView=(function(_super){
+	function ProgressView(bgColor){
+		this.bg=null;
+		this.load_text=null;
+		ProgressView.__super.call(this);
+		(bgColor===void 0)&& (bgColor="#fff");
+		this.bg=new Sprite();
+		this.bg.graphics.drawRect(0,0,1920,1080,bgColor);
+		this.bg.mouseEnabled=true;
+		this.addChild(this.bg);
+		this.load_text=new Label();
+		this.load_text.x=860;
+		this.load_text.y=500;
+		this.load_text.width=200;
+		this.load_text.fontSize=80;
+		this.load_text.align="center";
+		this.load_text.text="0%";
+		this.addChild(this.load_text);
+	}
+
+	__class(ProgressView,'com.ProgressView',_super);
+	var __proto=ProgressView.prototype;
+	/**加载进度*/
+	__proto.setProgressNum=function(num){
+		this.load_text.text=String(num)+"%";
+	}
+
+	return ProgressView;
+})(Sprite)
+
+
+/**
 *...
 *@author HappyKing
 */
@@ -15826,7 +15406,10 @@ var Main=(function(_super){
 		this.progress
 		Laya.init(1920,1080);
 		Laya.stage.bgColor="#000";
-		this.progress=new ProgressView();
+		Laya.stage.scaleMode="showall";
+		Laya.stage.screenMode="horizontal";
+		Laya.stage.alignH="center";
+		this.progress=new ProgressView("#D7F6F6");
 		Laya.stage.addChild(this.progress);
 		this.loadAsset();
 	}
@@ -15838,7 +15421,8 @@ var Main=(function(_super){
 		var arr=[];
 		arr.push("image/main_bg.png");
 		arr.push("image/tip.png");
-		for (i=1;i <=12;i++){
+		arr.push("res/atlas/image.atlas");
+		for (i=1;i <=43;i++){
 			if (i < 10){
 				arr.push("page1/未命名-1000"+i+".png");
 			}
@@ -15846,7 +15430,7 @@ var Main=(function(_super){
 				arr.push("page1/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=34;i++){
+		for (i=1;i <=41;i++){
 			if (i < 10){
 				arr.push("page2/未命名-1000"+i+".png");
 			}
@@ -15854,7 +15438,7 @@ var Main=(function(_super){
 				arr.push("page2/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=25;i++){
+		for (i=1;i <=38;i++){
 			if (i < 10){
 				arr.push("page3/未命名-1000"+i+".png");
 			}
@@ -15862,7 +15446,7 @@ var Main=(function(_super){
 				arr.push("page3/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=25;i++){
+		for (i=1;i <=58;i++){
 			if (i < 10){
 				arr.push("page4/未命名-1000"+i+".png");
 			}
@@ -15878,7 +15462,7 @@ var Main=(function(_super){
 				arr.push("page5/未命名-100"+i+".png");
 			}
 		}
-		for (i=1;i <=30;i++){
+		for (i=1;i <=62;i++){
 			if (i < 10){
 				arr.push("page6/未命名-1000"+i+".png");
 			}
@@ -15886,7 +15470,6 @@ var Main=(function(_super){
 				arr.push("page6/未命名-100"+i+".png");
 			}
 		}
-		arr.push("res/atlas/image.atlas");
 		arr.push("sounds/btneff.wav");
 		arr.push("sounds/page1.mp3");
 		arr.push("sounds/page2.mp3");
@@ -15898,14 +15481,15 @@ var Main=(function(_super){
 		Laya.loader.load(arr,new Handler(this,this.onComplete),new Handler(this,this.onProgress));
 	}
 
+	//Laya.loader.load("res/atlas/page1.atlas",null,null,Loader.ATLAS);
 	__proto.onProgress=function(e){
-		this.progress.load_txt.text=Math.floor(e *100)+"%";
+		this.progress.setProgressNum(Math.floor(e *100));
 	}
 
 	/**加载完成*/
 	__proto.onComplete=function(){
 		Laya.stage.removeChild(this.progress);
-		var main=new MainUIUI();
+		var main=new MainUI();
 		Laya.stage.addChild(main);
 	}
 
@@ -16405,468 +15989,6 @@ var Component=(function(_super){
 	});
 
 	return Component;
-})(Sprite)
-
-
-/**
-*<p> <code>MovieClip</code> 用于播放经过工具处理后的 swf 动画。</p>
-*/
-//class laya.ani.swf.MovieClip extends laya.display.Sprite
-var MovieClip=(function(_super){
-	function MovieClip(parentMovieClip){
-		/**@private 数据起始位置。*/
-		this._start=0;
-		/**@private 当前位置。*/
-		this._Pos=0;
-		/**@private 数据。*/
-		this._data=null;
-		/**@private */
-		this._curIndex=0;
-		/**@private */
-		this._preIndex=0;
-		/**@private */
-		this._playIndex=0;
-		/**@private */
-		this._playing=false;
-		/**@private */
-		this._ended=true;
-		/**@private 总帧数。*/
-		this._count=0;
-		/**@private id_data起始位置表*/
-		this._ids=null;
-		/**@private */
-		this._loadedImage={};
-		/**@private id_实例表*/
-		this._idOfSprite=null;
-		/**@private 父mc*/
-		this._parentMovieClip=null;
-		/**@private 需要更新的movieClip表*/
-		this._movieClipList=null;
-		/**@private */
-		this._labels=null;
-		/**资源根目录。*/
-		this.basePath=null;
-		/**@private */
-		this._atlasPath=null;
-		/**@private */
-		this._url=null;
-		/**@private */
-		this._isRoot=false;
-		/**@private */
-		this._completeHandler=null;
-		/**@private */
-		this._endFrame=-1;
-		/**播放间隔(单位：毫秒)。*/
-		this.interval=30;
-		/**是否循环播放 */
-		this.loop=false;
-		MovieClip.__super.call(this);
-		this._ids={};
-		this._idOfSprite=[];
-		this._reset();
-		this._playing=false;
-		this._parentMovieClip=parentMovieClip;
-		if (!parentMovieClip){
-			this._movieClipList=[this];
-			this._isRoot=true;
-			this._setUpNoticeType(0x1);
-			}else {
-			this._isRoot=false;
-			this._movieClipList=parentMovieClip._movieClipList;
-			this._movieClipList.push(this);
-		}
-	}
-
-	__class(MovieClip,'laya.ani.swf.MovieClip',_super);
-	var __proto=MovieClip.prototype;
-	/**
-	*<p>销毁此对象。以及销毁引用的Texture</p>
-	*@param destroyChild 是否同时销毁子节点，若值为true,则销毁子节点，否则不销毁子节点。
-	*/
-	__proto.destroy=function(destroyChild){
-		(destroyChild===void 0)&& (destroyChild=true);
-		this._clear();
-		_super.prototype.destroy.call(this,destroyChild);
-	}
-
-	/**@private */
-	__proto._setDisplay=function(value){
-		_super.prototype._setDisplay.call(this,value);
-		if (this._isRoot){
-			this._$3__onDisplay(value);
-		}
-	}
-
-	/**@private */
-	__proto._$3__onDisplay=function(value){
-		if (value)this.timer.loop(this.interval,this,this.updates,null,true);
-		else this.timer.clear(this,this.updates);
-	}
-
-	/**@private 更新时间轴*/
-	__proto.updates=function(){
-		if (this._parentMovieClip)return;
-		var i=0,len=0;
-		len=this._movieClipList.length;
-		for (i=0;i < len;i++){
-			this._movieClipList[i]&&this._movieClipList[i]._update();
-		}
-	}
-
-	/**
-	*增加一个标签到index帧上，播放到此index后会派发label事件
-	*@param label 标签名称
-	*@param index 索引位置
-	*/
-	__proto.addLabel=function(label,index){
-		if (!this._labels)this._labels={};
-		this._labels[index]=label;
-	}
-
-	/**
-	*删除某个标签
-	*@param label 标签名字，如果label为空，则删除所有Label
-	*/
-	__proto.removeLabel=function(label){
-		if (!label)this._labels=null;
-		else if (!this._labels){
-			for (var name in this._labels){
-				if (this._labels[name]===label){
-					delete this._labels[name];
-					break ;
-				}
-			}
-		}
-	}
-
-	/**
-	*@private
-	*动画的帧更新处理函数。
-	*/
-	__proto._update=function(){
-		if (!this._data)return;
-		if (!this._playing)return;
-		this._playIndex++;
-		if (this._playIndex >=this._count){
-			if (!this.loop){
-				this._playIndex--;
-				this.stop();
-				return;
-			}
-			this._playIndex=0;
-		}
-		this._parse(this._playIndex);
-		if (this._labels && this._labels[this._playIndex])this.event("label",this._labels[this._playIndex]);
-		if (this._endFrame!=-1&&this._endFrame==this._playIndex){
-			this._endFrame=-1;
-			if (this._completeHandler !=null){
-				var handler=this._completeHandler;
-				this._completeHandler=null;
-				handler.run();
-			}
-			this.stop();
-		}
-	}
-
-	/**
-	*停止播放动画。
-	*/
-	__proto.stop=function(){
-		this._playing=false;
-	}
-
-	/**
-	*跳到某帧并停止播放动画。
-	*@param frame 要跳到的帧
-	*/
-	__proto.gotoAndStop=function(index){
-		this.index=index;
-		this.stop();
-	}
-
-	/**
-	*@private
-	*清理。
-	*/
-	__proto._clear=function(){
-		this.stop();
-		this._idOfSprite.length=0;
-		if (!this._parentMovieClip){
-			this.timer.clear(this,this.updates);
-			var i=0,len=0;
-			len=this._movieClipList.length;
-			for (i=0;i < len;i++){
-				if (this._movieClipList[i] !=this)
-					this._movieClipList[i]._clear();
-			}
-			this._movieClipList.length=0;
-		}
-		if (this._atlasPath){
-			Loader.clearRes(this._atlasPath);
-		};
-		var key;
-		for (key in this._loadedImage){
-			if (this._loadedImage[key]){
-				Loader.clearRes(key);
-				this._loadedImage[key]=false;
-			}
-		}
-		this.removeChildren();
-		this.graphics=null;
-		this._parentMovieClip=null;
-	}
-
-	/**
-	*播放动画。
-	*@param index 帧索引。
-	*/
-	__proto.play=function(index,loop){
-		(index===void 0)&& (index=0);
-		(loop===void 0)&& (loop=true);
-		this.loop=loop;
-		this._playing=true;
-		if (this._data)
-			this._displayFrame(index);
-	}
-
-	/**@private */
-	__proto._displayFrame=function(frameIndex){
-		(frameIndex===void 0)&& (frameIndex=-1);
-		if (frameIndex !=-1){
-			if (this._curIndex > frameIndex)this._reset();
-			this._parse(frameIndex);
-		}
-	}
-
-	/**@private */
-	__proto._reset=function(rm){
-		(rm===void 0)&& (rm=true);
-		if (rm && this._curIndex !=1)this.removeChildren();
-		this._preIndex=this._curIndex=-1;
-		this._Pos=this._start;
-	}
-
-	/**@private */
-	__proto._parse=function(frameIndex){
-		var curChild=this;
-		var mc,sp,key=0,type=0,tPos=0,ttype=0,ifAdd=false;
-		var _idOfSprite=this._idOfSprite,_data=this._data,eStr;
-		if (this._ended)this._reset();
-		_data.pos=this._Pos;
-		this._ended=false;
-		this._playIndex=frameIndex;
-		if (this._curIndex > frameIndex&&frameIndex<this._preIndex){
-			this._reset(true);
-			_data.pos=this._Pos;
-		}
-		while ((this._curIndex <=frameIndex)&& (!this._ended)){
-			type=_data.getUint16();
-			switch (type){
-				case 12:
-					key=_data.getUint16();
-					tPos=this._ids[_data.getUint16()];
-					this._Pos=_data.pos;
-					_data.pos=tPos;
-					if ((ttype=_data.getUint8())==0){
-						var pid=_data.getUint16();
-						sp=_idOfSprite[key]
-						if (!sp){
-							sp=_idOfSprite[key]=new Sprite();
-							var spp=new Sprite();
-							spp.loadImage(this.basePath+pid+".png");
-							this._loadedImage[this.basePath+pid+".png"]=true;
-							sp.addChild(spp);
-							spp.size(_data.getFloat32(),_data.getFloat32());
-							var mat=_data._getMatrix();
-							spp.transform=mat;
-						}
-						sp.alpha=1;
-						}else if (ttype==1){
-						mc=_idOfSprite[key]
-						if (!mc){
-							_idOfSprite[key]=mc=new MovieClip(this);
-							mc.interval=this.interval;
-							mc._ids=this._ids;
-							mc.basePath=this.basePath;
-							mc._setData(_data,tPos);
-							mc._initState();
-							mc.play(0);
-						}
-						mc.alpha=1;
-					}
-					_data.pos=this._Pos;
-					break ;
-				case 3:;
-					var node=_idOfSprite[ _data.getUint16()];
-					if (node){
-						this.addChild(node);
-						node.zOrder=_data.getUint16();
-						ifAdd=true;
-					}
-					break ;
-				case 4:
-					node=_idOfSprite[ _data.getUint16()];
-					node && node.removeSelf();
-					break ;
-				case 5:
-					_idOfSprite[_data.getUint16()][MovieClip._ValueList[_data.getUint16()]]=(_data.getFloat32());
-					break ;
-				case 6:
-					_idOfSprite[_data.getUint16()].visible=(_data.getUint8()> 0);
-					break ;
-				case 7:
-					sp=_idOfSprite[ _data.getUint16()];
-					var mt=sp.transform || Matrix.create();
-					mt.setTo(_data.getFloat32(),_data.getFloat32(),_data.getFloat32(),_data.getFloat32(),_data.getFloat32(),_data.getFloat32());
-					sp.transform=mt;
-					break ;
-				case 8:
-					_idOfSprite[_data.getUint16()].setPos(_data.getFloat32(),_data.getFloat32());
-					break ;
-				case 9:
-					_idOfSprite[_data.getUint16()].setSize(_data.getFloat32(),_data.getFloat32());
-					break ;
-				case 10:
-					_idOfSprite[ _data.getUint16()].alpha=_data.getFloat32();
-					break ;
-				case 11:
-					_idOfSprite[_data.getUint16()].setScale(_data.getFloat32(),_data.getFloat32());
-					break ;
-				case 98:
-					eStr=_data.getString();
-					this.event(eStr);
-					if (eStr=="stop")this.stop();
-					break ;
-				case 99:
-					this._curIndex=_data.getUint16();
-					ifAdd && this.updateZOrder();
-					break ;
-				case 100:
-					this._count=this._curIndex+1;
-					this._ended=true;
-					if (this._playing){
-						this.event("enterframe");
-						this.event("end");
-						this.event("complete");
-					}
-					this._reset(false);
-					break ;
-				}
-		}
-		if (this._playing&&!this._ended)this.event("enterframe");
-		this._Pos=_data.pos;
-	}
-
-	/**@private */
-	__proto._setData=function(data,start){
-		this._data=data;
-		this._start=start+3;
-	}
-
-	/**
-	*加载资源。
-	*@param url swf 资源地址。
-	*@param atlas 是否使用图集资源
-	*@param atlasPath 图集路径，默认使用与swf同名的图集
-	*/
-	__proto.load=function(url,atlas,atlasPath){
-		(atlas===void 0)&& (atlas=false);
-		this._url=url=URL.formatURL(url);
-		if(atlas)this._atlasPath=atlasPath?atlasPath:url.split(".swf")[0]+".json";
-		this.stop();
-		this._clear();
-		this._movieClipList=[this];
-		var urls;
-		urls=[ {url:url,type:"arraybuffer" }];
-		if (this._atlasPath){
-			urls.push({url:this._atlasPath,type:"atlas" });
-		}
-		Laya.loader.load(urls,Handler.create(this,this._onLoaded));
-	}
-
-	/**@private */
-	__proto._onLoaded=function(){
-		var data;
-		data=Loader.getRes(this._url);
-		if (!data){
-			this.event("error","file not find");
-			return;
-		}
-		this.basePath=this._atlasPath?Loader.getAtlas(this._atlasPath).dir:this._url.split(".swf")[0]+"/image/";
-		this._initData(data);
-	}
-
-	/**@private */
-	__proto._initState=function(){
-		this._reset();
-		this._ended=false;
-		var preState=this._playing;
-		this._playing=false;
-		this._curIndex=0;
-		while (!this._ended)this._parse(++this._curIndex);
-		this._playing=preState;
-	}
-
-	/**@private */
-	__proto._initData=function(data){
-		this._data=new Byte(data);
-		var i=0,len=this._data.getUint16();
-		for (i=0;i < len;i++)this._ids[this._data.getInt16()]=this._data.getInt32();
-		this.interval=1000 / this._data.getUint16();
-		this._setData(this._data,this._ids[32767]);
-		this._initState();
-		this.play(0);
-		this.event("loaded");
-		if (!this._parentMovieClip)this.timer.loop(this.interval,this,this.updates,null,true);
-	}
-
-	/**
-	*从开始索引播放到结束索引，结束之后出发complete回调
-	*@param start 开始索引
-	*@param end 结束索引
-	*@param complete 结束回调
-	*/
-	__proto.playTo=function(start,end,complete){
-		this._completeHandler=complete;
-		this._endFrame=end;
-		this.play(start,false);
-	}
-
-	/**当前播放索引。*/
-	__getset(0,__proto,'index',function(){
-		return this._playIndex;
-		},function(value){
-		this._playIndex=value;
-		if (this._data)
-			this._displayFrame(this._playIndex);
-		if (this._labels && this._labels[value])this.event("label",this._labels[value]);
-	});
-
-	/**
-	*帧总数。
-	*/
-	__getset(0,__proto,'count',function(){
-		return this._count;
-	});
-
-	/**
-	*是否在播放中
-	*/
-	__getset(0,__proto,'playing',function(){
-		return this._playing;
-	});
-
-	/**
-	*资源地址。
-	*/
-	__getset(0,__proto,'url',null,function(path){
-		this.load(path);
-	});
-
-	__static(MovieClip,
-	['_ValueList',function(){return this._ValueList=["x","y","width","height","scaleX","scaleY","rotation","alpha"];}
-	]);
-	return MovieClip;
 })(Sprite)
 
 
@@ -27276,104 +26398,6 @@ var VScrollBar=(function(_super){
 
 
 /**
-*使用 <code>VSlider</code> 控件，用户可以通过在滑块轨道的终点之间移动滑块来选择值。
-*<p> <code>VSlider</code> 控件采用垂直方向。滑块轨道从下往上扩展，而标签位于轨道的左右两侧。</p>
-*
-*@example <caption>以下示例代码，创建了一个 <code>VSlider</code> 实例。</caption>
-*package
-*{
-	*import laya.ui.HSlider;
-	*import laya.ui.VSlider;
-	*import laya.utils.Handler;
-	*public class VSlider_Example
-	*{
-		*private var vSlider:VSlider;
-		*public function VSlider_Example()
-		*{
-			*Laya.init(640,800);//设置游戏画布宽高。
-			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-			*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,onLoadComplete));//加载资源。
-			*}
-		*private function onLoadComplete():void
-		*{
-			*vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-			*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-			*vSlider.min=0;//设置 vSlider 最低位置值。
-			*vSlider.max=10;//设置 vSlider 最高位置值。
-			*vSlider.value=2;//设置 vSlider 当前位置值。
-			*vSlider.tick=1;//设置 vSlider 刻度值。
-			*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-			*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-			*vSlider.changeHandler=new Handler(this,onChange);//设置 vSlider 位置变化处理器。
-			*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
-			*}
-		*private function onChange(value:Number):void
-		*{
-			*trace("滑块的位置： value="+value);
-			*}
-		*}
-	*}
-*@example
-*Laya.init(640,800);//设置游戏画布宽高
-*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
-*var vSlider;
-*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],laya.utils.Handler.create(this,onLoadComplete));//加载资源。
-*function onLoadComplete(){
-	*vSlider=new laya.ui.VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-	*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-	*vSlider.min=0;//设置 vSlider 最低位置值。
-	*vSlider.max=10;//设置 vSlider 最高位置值。
-	*vSlider.value=2;//设置 vSlider 当前位置值。
-	*vSlider.tick=1;//设置 vSlider 刻度值。
-	*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-	*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-	*vSlider.changeHandler=new laya.utils.Handler(this,onChange);//设置 vSlider 位置变化处理器。
-	*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
-	*}
-*function onChange(value){
-	*console.log("滑块的位置： value="+value);
-	*}
-*@example
-*import HSlider=laya.ui.HSlider;
-*import VSlider=laya.ui.VSlider;
-*import Handler=laya.utils.Handler;
-*class VSlider_Example {
-	*private vSlider:VSlider;
-	*constructor(){
-		*Laya.init(640,800);//设置游戏画布宽高。
-		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-		*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,this.onLoadComplete));//加载资源。
-		*}
-	*private onLoadComplete():void {
-		*this.vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-		*this.vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-		*this.vSlider.min=0;//设置 vSlider 最低位置值。
-		*this.vSlider.max=10;//设置 vSlider 最高位置值。
-		*this.vSlider.value=2;//设置 vSlider 当前位置值。
-		*this.vSlider.tick=1;//设置 vSlider 刻度值。
-		*this.vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-		*this.vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-		*this.vSlider.changeHandler=new Handler(this,this.onChange);//设置 vSlider 位置变化处理器。
-		*Laya.stage.addChild(this.vSlider);//把 vSlider 添加到显示列表。
-		*}
-	*private onChange(value:number):void {
-		*console.log("滑块的位置： value="+value);
-		*}
-	*}
-*@see laya.ui.Slider
-*/
-//class laya.ui.VSlider extends laya.ui.Slider
-var VSlider=(function(_super){
-	function VSlider(){
-		VSlider.__super.call(this);;
-	}
-
-	__class(VSlider,'laya.ui.VSlider',_super);
-	return VSlider;
-})(Slider)
-
-
-/**
 *<code>TextInput</code> 类用于创建显示对象以显示和输入文本。
 *
 *@example <caption>以下示例代码，创建了一个 <code>TextInput</code> 实例。</caption>
@@ -27696,6 +26720,104 @@ var TextInput=(function(_super){
 
 	return TextInput;
 })(Label)
+
+
+/**
+*使用 <code>VSlider</code> 控件，用户可以通过在滑块轨道的终点之间移动滑块来选择值。
+*<p> <code>VSlider</code> 控件采用垂直方向。滑块轨道从下往上扩展，而标签位于轨道的左右两侧。</p>
+*
+*@example <caption>以下示例代码，创建了一个 <code>VSlider</code> 实例。</caption>
+*package
+*{
+	*import laya.ui.HSlider;
+	*import laya.ui.VSlider;
+	*import laya.utils.Handler;
+	*public class VSlider_Example
+	*{
+		*private var vSlider:VSlider;
+		*public function VSlider_Example()
+		*{
+			*Laya.init(640,800);//设置游戏画布宽高。
+			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+			*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,onLoadComplete));//加载资源。
+			*}
+		*private function onLoadComplete():void
+		*{
+			*vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+			*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+			*vSlider.min=0;//设置 vSlider 最低位置值。
+			*vSlider.max=10;//设置 vSlider 最高位置值。
+			*vSlider.value=2;//设置 vSlider 当前位置值。
+			*vSlider.tick=1;//设置 vSlider 刻度值。
+			*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+			*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+			*vSlider.changeHandler=new Handler(this,onChange);//设置 vSlider 位置变化处理器。
+			*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
+			*}
+		*private function onChange(value:Number):void
+		*{
+			*trace("滑块的位置： value="+value);
+			*}
+		*}
+	*}
+*@example
+*Laya.init(640,800);//设置游戏画布宽高
+*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
+*var vSlider;
+*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],laya.utils.Handler.create(this,onLoadComplete));//加载资源。
+*function onLoadComplete(){
+	*vSlider=new laya.ui.VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+	*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+	*vSlider.min=0;//设置 vSlider 最低位置值。
+	*vSlider.max=10;//设置 vSlider 最高位置值。
+	*vSlider.value=2;//设置 vSlider 当前位置值。
+	*vSlider.tick=1;//设置 vSlider 刻度值。
+	*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+	*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+	*vSlider.changeHandler=new laya.utils.Handler(this,onChange);//设置 vSlider 位置变化处理器。
+	*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
+	*}
+*function onChange(value){
+	*console.log("滑块的位置： value="+value);
+	*}
+*@example
+*import HSlider=laya.ui.HSlider;
+*import VSlider=laya.ui.VSlider;
+*import Handler=laya.utils.Handler;
+*class VSlider_Example {
+	*private vSlider:VSlider;
+	*constructor(){
+		*Laya.init(640,800);//设置游戏画布宽高。
+		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+		*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,this.onLoadComplete));//加载资源。
+		*}
+	*private onLoadComplete():void {
+		*this.vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+		*this.vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+		*this.vSlider.min=0;//设置 vSlider 最低位置值。
+		*this.vSlider.max=10;//设置 vSlider 最高位置值。
+		*this.vSlider.value=2;//设置 vSlider 当前位置值。
+		*this.vSlider.tick=1;//设置 vSlider 刻度值。
+		*this.vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+		*this.vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+		*this.vSlider.changeHandler=new Handler(this,this.onChange);//设置 vSlider 位置变化处理器。
+		*Laya.stage.addChild(this.vSlider);//把 vSlider 添加到显示列表。
+		*}
+	*private onChange(value:number):void {
+		*console.log("滑块的位置： value="+value);
+		*}
+	*}
+*@see laya.ui.Slider
+*/
+//class laya.ui.VSlider extends laya.ui.Slider
+var VSlider=(function(_super){
+	function VSlider(){
+		VSlider.__super.call(this);;
+	}
+
+	__class(VSlider,'laya.ui.VSlider',_super);
+	return VSlider;
+})(Slider)
 
 
 /**
@@ -28211,9 +27333,9 @@ var GraphicAnimation=(function(_super){
 })(FrameAnimation)
 
 
-//class ui.MainUI extends laya.ui.View
-var MainUI=(function(_super){
-	function MainUI(){
+//class ui.MainUIUI extends laya.ui.View
+var MainUIUI=(function(_super){
+	function MainUIUI(){
 		this.ani1=null;
 		this.xiao_clip1=null;
 		this.img_btn1=null;
@@ -28230,20 +27352,20 @@ var MainUI=(function(_super){
 		this.xiao_img=null;
 		this.question_btn=null;
 		this.tip_img=null;
-		MainUI.__super.call(this);
+		MainUIUI.__super.call(this);
 	}
 
-	__class(MainUI,'ui.MainUI',_super);
-	var __proto=MainUI.prototype;
+	__class(MainUIUI,'ui.MainUIUI',_super);
+	var __proto=MainUIUI.prototype;
 	__proto.createChildren=function(){
 		laya.ui.Component.prototype.createChildren.call(this);
-		this.createView(MainUI.uiView);
+		this.createView(MainUIUI.uiView);
 	}
 
-	__static(MainUI,
+	__static(MainUIUI,
 	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"image/main_bg.png"}},{"type":"Image","props":{"y":226,"x":35,"skin":"image/img_1.png"}},{"type":"Clip","props":{"y":536,"x":109,"var":"xiao_clip1","skin":"image/clip_kuang.png","clipX":2}},{"type":"Label","props":{"y":190,"x":155,"text":"喝水","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":160,"var":"img_btn1","stateNum":3,"skin":"image/btn_play.png","name":"img_btn1"},"compId":26},{"type":"Image","props":{"y":226,"x":348,"skin":"image/img_2.png"}},{"type":"Clip","props":{"y":536,"x":422,"var":"xiao_clip2","skin":"image/clip_kuang.png","index":0,"clipX":2}},{"type":"Label","props":{"y":190,"x":469,"text":"如厕","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":473,"var":"img_btn2","stateNum":3,"skin":"image/btn_play.png","name":"img_btn2"},"compId":28},{"type":"Image","props":{"y":226,"x":660,"skin":"image/img_3.png"}},{"type":"Clip","props":{"y":536,"x":734,"var":"xiao_clip3","skin":"image/clip_kuang.png","clipX":2}},{"type":"Label","props":{"y":190,"x":765,"text":"拍皮球","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":785,"var":"img_btn3","stateNum":3,"skin":"image/btn_play.png","name":"img_btn3"}},{"type":"Image","props":{"y":226,"x":973,"skin":"image/img_4.png"}},{"type":"Clip","props":{"y":536,"x":1048,"var":"xiao_clip4","skin":"image/clip_kuang.png","clipX":2}},{"type":"Label","props":{"y":190,"x":1063,"text":"骑平衡车","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":1098,"var":"img_btn4","stateNum":3,"skin":"image/btn_play.png","name":"img_btn4"}},{"type":"Image","props":{"y":226,"x":1285,"skin":"image/img_5.png"}},{"type":"Clip","props":{"y":536,"x":1360,"var":"xiao_clip5","skin":"image/clip_kuang.png","clipX":2}},{"type":"Label","props":{"y":190,"x":1358,"text":"做课前准备","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":1410,"var":"img_btn5","stateNum":3,"skin":"image/btn_play.png","name":"img_btn5"}},{"type":"Image","props":{"y":226,"x":1598,"skin":"image/img_6.png"}},{"type":"Clip","props":{"y":536,"x":1673,"var":"xiao_clip6","skin":"image/clip_kuang.png","clipX":2}},{"type":"Label","props":{"y":190,"x":1688,"text":"玩跷跷板","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Button","props":{"y":244,"x":1723,"var":"img_btn6","stateNum":3,"skin":"image/btn_play.png","name":"img_btn6"}},{"type":"Image","props":{"y":818,"x":898,"var":"xiao_img","skin":"image/xiao.png","name":"xiao_img"}},{"type":"Button","props":{"y":35,"x":1617,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png","name":"question_btn"}},{"type":"Image","props":{"y":16,"x":218,"var":"tip_img","skin":"image/tip.png"}}],"animations":[{"nodes":[{"target":26,"keyframes":{"stateNum":[{"value":"1","tweenMethod":"linearNone","tween":true,"target":26,"key":"stateNum","index":0},{"value":"3","tweenMethod":"linearNone","tween":true,"target":26,"key":"stateNum","index":3}]}},{"target":28,"keyframes":{"stateNum":[{"value":"1","tweenMethod":"linearNone","tween":true,"target":28,"key":"stateNum","index":0},{"value":"3","tweenMethod":"linearNone","tween":true,"target":28,"key":"stateNum","index":3}]}}],"name":"ani1","id":1,"frameRate":24,"action":0}]};}
 	]);
-	return MainUI;
+	return MainUIUI;
 })(View)
 
 
@@ -28265,27 +27387,6 @@ var Page1UI=(function(_super){
 	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#D7F6F6"}},{"type":"Image","props":{"y":40,"x":460,"var":"img","skin":"page1/未命名-10001.png"}}]};}
 	]);
 	return Page1UI;
-})(View)
-
-
-//class ui.ProgressViewUI extends laya.ui.View
-var ProgressViewUI=(function(_super){
-	function ProgressViewUI(){
-		this.load_txt=null;
-		ProgressViewUI.__super.call(this);
-	}
-
-	__class(ProgressViewUI,'ui.ProgressViewUI',_super);
-	var __proto=ProgressViewUI.prototype;
-	__proto.createChildren=function(){
-		laya.ui.Component.prototype.createChildren.call(this);
-		this.createView(ProgressViewUI.uiView);
-	}
-
-	__static(ProgressViewUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"y":0,"x":0,"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#D7F6F6"}},{"type":"Label","props":{"y":500,"x":860,"width":200,"var":"load_txt","text":"0%","fontSize":80,"color":"#000000","align":"center"}}]};}
-	]);
-	return ProgressViewUI;
 })(View)
 
 
@@ -28815,29 +27916,29 @@ var TextArea=(function(_super){
 *...
 *@author HappyKing
 */
-//class view.MainUIUI extends ui.MainUI
-var MainUIUI=(function(_super){
-	function MainUIUI(){
+//class view.MainUI extends ui.MainUIUI
+var MainUI=(function(_super){
+	function MainUI(){
 		this.xx=898;
 		this.yy=818;
-		MainUIUI.__super.call(this);
+		this.animationPage=null;
+		MainUI.__super.call(this);
 		this.dragRect=new Rectangle(0,0,1920,1080);
-		this.page
 		this.tip_img.visible=false;
 		this.question_btn.on("click",this,this.onTipShow);
 		for (var i=1;i <=6;i++){
 			this["img_btn"+i].on("click",this,this.onImagePlay);
 		}
 		this.xiao_img.on("mousedown",this,this.onDragXiao);
-		this.page=new Page1();
-		this.addChild(this.page);
-		this.page.visible=false;
+		this.animationPage=new AnimationPage(false,"#D7F6F6");
+		this.addChild(this.animationPage);
+		this.animationPage.visible=false;
 		this.addChild(this.question_btn);
 		this.addChild(this.tip_img);
 	}
 
-	__class(MainUIUI,'view.MainUIUI',_super);
-	var __proto=MainUIUI.prototype;
+	__class(MainUI,'view.MainUI',_super);
+	var __proto=MainUI.prototype;
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
@@ -28849,34 +27950,40 @@ var MainUIUI=(function(_super){
 	}
 
 	__proto.onImagePlay=function(e){
-		this.page.visible=true;
+		this.animationPage.visible=true;
+		this.animationPage.x=0;
 		switch(e.currentTarget.name){
 			case "img_btn1":
-				this.page.pageType=1;
-				this.page.total=12;
+				this.animationPage.setAni("page1/未命名-1",1000,1000);
+				this.animationPage.total=43;
+				SoundManager.playMusic("sounds/page1.mp3",1);
 				break ;
 			case "img_btn2":
-				this.page.pageType=2;
-				this.page.total=34;
+				this.animationPage.setAni("page2/未命名-1",1000,1000);
+				this.animationPage.total=41;
+				SoundManager.playMusic("sounds/page2.mp3",1);
 				break ;
 			case "img_btn3":
-				this.page.pageType=3;
-				this.page.total=25;
+				this.animationPage.setAni("page3/未命名-1",1000,1000);
+				this.animationPage.total=38;
+				SoundManager.playMusic("sounds/page3.mp3",1);
 				break ;
 			case "img_btn4":
-				this.page.pageType=4;
-				this.page.total=25;
+				this.animationPage.setAni("page4/未命名-1",1000,1000);
+				this.animationPage.total=58;
+				SoundManager.playMusic("sounds/page4.mp3",1);
 				break ;
 			case "img_btn5":
-				this.page.pageType=5;
-				this.page.total=35
+				this.animationPage.setAni("page5/未命名-1",1000,1000);
+				this.animationPage.total=35;
+				SoundManager.playMusic("sounds/page5.mp3",1);
 				break ;
 			case "img_btn6":
-				this.page.pageType=6;
-				this.page.total=30
+				this.animationPage.setAni("page6/未命名-1",1000,1000);
+				this.animationPage.total=62;
+				SoundManager.playMusic("sounds/page6.mp3",1);
 				break ;
 			}
-		this.page.init();
 	}
 
 	/**笑脸拖拽*/
@@ -28899,77 +28006,11 @@ var MainUIUI=(function(_super){
 		this.xiao_img.y=this.yy;
 	}
 
-	return MainUIUI;
-})(MainUI)
+	return MainUI;
+})(MainUIUI)
 
 
-/**
-*...
-*@author HappyKing
-*/
-//class view.Page1 extends ui.Page1UI
-var Page1=(function(_super){
-	function Page1(){
-		this.index=0;
-		/**种类*/
-		this.pageType=1;
-		/**总长度*/
-		this.total=10;
-		Page1.__super.call(this);
-	}
-
-	__class(Page1,'view.Page1',_super);
-	var __proto=Page1.prototype;
-	__proto.init=function(){
-		this.img.skin="page"+this.pageType+"/未命名-1000"+1+".png"
-		this.timer.loop(50,this,this.onAnimation);
-		this.on("mousedown",this,this.onBack);
-		this.index=0;
-		SoundManager.playMusic("sounds/page"+this.pageType+".mp3",1);
-	}
-
-	/**播放动画*/
-	__proto.onAnimation=function(){
-		this.index++;
-		if (this.index < 10){
-			this.img.skin="page"+this.pageType+"/未命名-1000"+this.index+".png"
-		}
-		else{
-			this.img.skin="page"+this.pageType+"/未命名-100"+this.index+".png"
-		}
-		if (this.index >=this.total){
-			this.timer.clear(this,this.onAnimation);
-		}
-	}
-
-	/**返回*/
-	__proto.onBack=function(e){
-		this.off("mousedown",this ,this.onBack);
-		this.timer.clear(this,this.onAnimation);
-		this.visible=false;
-		SoundManager.stopAll();
-	}
-
-	return Page1;
-})(Page1UI)
-
-
-/**
-*...
-*@author Happyking
-*/
-//class view.ProgressView extends ui.ProgressViewUI
-var ProgressView=(function(_super){
-	function ProgressView(){
-		ProgressView.__super.call(this);
-	}
-
-	__class(ProgressView,'view.ProgressView',_super);
-	return ProgressView;
-})(ProgressViewUI)
-
-
-	Laya.__init([EventDispatcher,LoaderManager,Render,Browser,View,Timer,GraphicAnimation,LocalStorage]);
+	Laya.__init([LoaderManager,EventDispatcher,Render,Browser,View,Timer,GraphicAnimation,LocalStorage]);
 	new Main();
 
 })(window,document,Laya);
