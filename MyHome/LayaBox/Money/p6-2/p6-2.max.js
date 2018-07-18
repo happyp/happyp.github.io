@@ -15420,6 +15420,8 @@ var Main=(function(_super){
 		var arr=[];
 		arr.push("image/bg_img.png");
 		arr.push("image/tip.png");
+		arr.push("clip_img1.png");
+		arr.push("clip_img2.png");
 		arr.push("res/atlas/image.atlas");
 		arr.push("res/atlas/hua.atlas");
 		for (i=1;i <=36;i++){
