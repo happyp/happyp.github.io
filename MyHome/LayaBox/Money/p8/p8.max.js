@@ -15420,11 +15420,11 @@ var Main=(function(_super){
 		var arr=[];
 		arr.push("image/bg_img.png");
 		arr.push("image/tip.png");
-		arr.push("image/img_1.png");
-		arr.push("image/img_2.png");
-		arr.push("image/img_3.png");
-		arr.push("image/img_4.png");
-		arr.push("image/img_5.png");
+		arr.push("image/未命名-1.png");
+		arr.push("image/未命名-2.png");
+		arr.push("image/未命名-3.png");
+		arr.push("image/未命名-4.png");
+		arr.push("image/未命名-5.png");
 		arr.push("res/atlas/image.atlas");
 		Laya.loader.load(arr,new Handler(this,this.onComplete),new Handler(this,this.onProgress));
 	}
