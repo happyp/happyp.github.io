@@ -15420,12 +15420,19 @@ var Main=(function(_super){
 		var arr=[];
 		arr.push("image/bg_img.png");
 		arr.push("image/tip.png");
-		arr.push("image/未命名-1.png");
-		arr.push("image/未命名-2.png");
-		arr.push("image/未命名-3.png");
-		arr.push("image/未命名-4.png");
-		arr.push("image/未命名-5.png");
+		arr.push("image/未命名-10001.png");
+		arr.push("image/未命名-20001.png");
+		arr.push("image/未命名-30001.png");
+		arr.push("image/未命名-40001.png");
+		arr.push("image/未命名-50001.png");
 		arr.push("res/atlas/image.atlas");
+		arr.push("sounds/btneff.wav");
+		arr.push("sounds/page1.mp3");
+		arr.push("sounds/page2.mp3");
+		arr.push("sounds/page3.mp3");
+		arr.push("sounds/page4.mp3");
+		arr.push("sounds/page5.mp3");
+		arr.push("sounds/tip.mp3");
 		Laya.loader.load(arr,new Handler(this,this.onComplete),new Handler(this,this.onProgress));
 	}
 
