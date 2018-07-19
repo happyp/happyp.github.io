@@ -15401,7 +15401,6 @@ var ProgressView=(function(_super){
 //class Main extends laya.display.Sprite
 var Main=(function(_super){
 	function Main(){
-		this.skins=null;
 		Main.__super.call(this);
 		this.progress
 		Laya.init(1920,1080);
@@ -27942,7 +27941,7 @@ var MainUI=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 		else{
 			SoundManager.stopAll();

@@ -15423,6 +15423,7 @@ var Main=(function(_super){
 		arr.push("image/img_2.png");
 		arr.push("image/tip.png");
 		arr.push("res/atlas/image.atlas");
+		arr.push("res/atlas/hua.atlas");
 		for (i=1;i <=62;i++){
 			if (i < 10){
 				arr.push("page1/未命名-1000"+i+".png");
@@ -26364,6 +26365,104 @@ var VScrollBar=(function(_super){
 
 
 /**
+*使用 <code>VSlider</code> 控件，用户可以通过在滑块轨道的终点之间移动滑块来选择值。
+*<p> <code>VSlider</code> 控件采用垂直方向。滑块轨道从下往上扩展，而标签位于轨道的左右两侧。</p>
+*
+*@example <caption>以下示例代码，创建了一个 <code>VSlider</code> 实例。</caption>
+*package
+*{
+	*import laya.ui.HSlider;
+	*import laya.ui.VSlider;
+	*import laya.utils.Handler;
+	*public class VSlider_Example
+	*{
+		*private var vSlider:VSlider;
+		*public function VSlider_Example()
+		*{
+			*Laya.init(640,800);//设置游戏画布宽高。
+			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+			*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,onLoadComplete));//加载资源。
+			*}
+		*private function onLoadComplete():void
+		*{
+			*vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+			*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+			*vSlider.min=0;//设置 vSlider 最低位置值。
+			*vSlider.max=10;//设置 vSlider 最高位置值。
+			*vSlider.value=2;//设置 vSlider 当前位置值。
+			*vSlider.tick=1;//设置 vSlider 刻度值。
+			*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+			*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+			*vSlider.changeHandler=new Handler(this,onChange);//设置 vSlider 位置变化处理器。
+			*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
+			*}
+		*private function onChange(value:Number):void
+		*{
+			*trace("滑块的位置： value="+value);
+			*}
+		*}
+	*}
+*@example
+*Laya.init(640,800);//设置游戏画布宽高
+*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
+*var vSlider;
+*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],laya.utils.Handler.create(this,onLoadComplete));//加载资源。
+*function onLoadComplete(){
+	*vSlider=new laya.ui.VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+	*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+	*vSlider.min=0;//设置 vSlider 最低位置值。
+	*vSlider.max=10;//设置 vSlider 最高位置值。
+	*vSlider.value=2;//设置 vSlider 当前位置值。
+	*vSlider.tick=1;//设置 vSlider 刻度值。
+	*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+	*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+	*vSlider.changeHandler=new laya.utils.Handler(this,onChange);//设置 vSlider 位置变化处理器。
+	*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
+	*}
+*function onChange(value){
+	*console.log("滑块的位置： value="+value);
+	*}
+*@example
+*import HSlider=laya.ui.HSlider;
+*import VSlider=laya.ui.VSlider;
+*import Handler=laya.utils.Handler;
+*class VSlider_Example {
+	*private vSlider:VSlider;
+	*constructor(){
+		*Laya.init(640,800);//设置游戏画布宽高。
+		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
+		*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,this.onLoadComplete));//加载资源。
+		*}
+	*private onLoadComplete():void {
+		*this.vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
+		*this.vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
+		*this.vSlider.min=0;//设置 vSlider 最低位置值。
+		*this.vSlider.max=10;//设置 vSlider 最高位置值。
+		*this.vSlider.value=2;//设置 vSlider 当前位置值。
+		*this.vSlider.tick=1;//设置 vSlider 刻度值。
+		*this.vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
+		*this.vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
+		*this.vSlider.changeHandler=new Handler(this,this.onChange);//设置 vSlider 位置变化处理器。
+		*Laya.stage.addChild(this.vSlider);//把 vSlider 添加到显示列表。
+		*}
+	*private onChange(value:number):void {
+		*console.log("滑块的位置： value="+value);
+		*}
+	*}
+*@see laya.ui.Slider
+*/
+//class laya.ui.VSlider extends laya.ui.Slider
+var VSlider=(function(_super){
+	function VSlider(){
+		VSlider.__super.call(this);;
+	}
+
+	__class(VSlider,'laya.ui.VSlider',_super);
+	return VSlider;
+})(Slider)
+
+
+/**
 *<code>TextInput</code> 类用于创建显示对象以显示和输入文本。
 *
 *@example <caption>以下示例代码，创建了一个 <code>TextInput</code> 实例。</caption>
@@ -26686,104 +26785,6 @@ var TextInput=(function(_super){
 
 	return TextInput;
 })(Label)
-
-
-/**
-*使用 <code>VSlider</code> 控件，用户可以通过在滑块轨道的终点之间移动滑块来选择值。
-*<p> <code>VSlider</code> 控件采用垂直方向。滑块轨道从下往上扩展，而标签位于轨道的左右两侧。</p>
-*
-*@example <caption>以下示例代码，创建了一个 <code>VSlider</code> 实例。</caption>
-*package
-*{
-	*import laya.ui.HSlider;
-	*import laya.ui.VSlider;
-	*import laya.utils.Handler;
-	*public class VSlider_Example
-	*{
-		*private var vSlider:VSlider;
-		*public function VSlider_Example()
-		*{
-			*Laya.init(640,800);//设置游戏画布宽高。
-			*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-			*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,onLoadComplete));//加载资源。
-			*}
-		*private function onLoadComplete():void
-		*{
-			*vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-			*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-			*vSlider.min=0;//设置 vSlider 最低位置值。
-			*vSlider.max=10;//设置 vSlider 最高位置值。
-			*vSlider.value=2;//设置 vSlider 当前位置值。
-			*vSlider.tick=1;//设置 vSlider 刻度值。
-			*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-			*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-			*vSlider.changeHandler=new Handler(this,onChange);//设置 vSlider 位置变化处理器。
-			*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
-			*}
-		*private function onChange(value:Number):void
-		*{
-			*trace("滑块的位置： value="+value);
-			*}
-		*}
-	*}
-*@example
-*Laya.init(640,800);//设置游戏画布宽高
-*Laya.stage.bgColor="#efefef";//设置画布的背景颜色
-*var vSlider;
-*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],laya.utils.Handler.create(this,onLoadComplete));//加载资源。
-*function onLoadComplete(){
-	*vSlider=new laya.ui.VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-	*vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-	*vSlider.min=0;//设置 vSlider 最低位置值。
-	*vSlider.max=10;//设置 vSlider 最高位置值。
-	*vSlider.value=2;//设置 vSlider 当前位置值。
-	*vSlider.tick=1;//设置 vSlider 刻度值。
-	*vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-	*vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-	*vSlider.changeHandler=new laya.utils.Handler(this,onChange);//设置 vSlider 位置变化处理器。
-	*Laya.stage.addChild(vSlider);//把 vSlider 添加到显示列表。
-	*}
-*function onChange(value){
-	*console.log("滑块的位置： value="+value);
-	*}
-*@example
-*import HSlider=laya.ui.HSlider;
-*import VSlider=laya.ui.VSlider;
-*import Handler=laya.utils.Handler;
-*class VSlider_Example {
-	*private vSlider:VSlider;
-	*constructor(){
-		*Laya.init(640,800);//设置游戏画布宽高。
-		*Laya.stage.bgColor="#efefef";//设置画布的背景颜色。
-		*Laya.loader.load(["resource/ui/vslider.png","resource/ui/vslider$bar.png"],Handler.create(this,this.onLoadComplete));//加载资源。
-		*}
-	*private onLoadComplete():void {
-		*this.vSlider=new VSlider();//创建一个 VSlider 类的实例对象 vSlider 。
-		*this.vSlider.skin="resource/ui/vslider.png";//设置 vSlider 的皮肤。
-		*this.vSlider.min=0;//设置 vSlider 最低位置值。
-		*this.vSlider.max=10;//设置 vSlider 最高位置值。
-		*this.vSlider.value=2;//设置 vSlider 当前位置值。
-		*this.vSlider.tick=1;//设置 vSlider 刻度值。
-		*this.vSlider.x=100;//设置 vSlider 对象的属性 x 的值，用于控制 vSlider 对象的显示位置。
-		*this.vSlider.y=100;//设置 vSlider 对象的属性 y 的值，用于控制 vSlider 对象的显示位置。
-		*this.vSlider.changeHandler=new Handler(this,this.onChange);//设置 vSlider 位置变化处理器。
-		*Laya.stage.addChild(this.vSlider);//把 vSlider 添加到显示列表。
-		*}
-	*private onChange(value:number):void {
-		*console.log("滑块的位置： value="+value);
-		*}
-	*}
-*@see laya.ui.Slider
-*/
-//class laya.ui.VSlider extends laya.ui.Slider
-var VSlider=(function(_super){
-	function VSlider(){
-		VSlider.__super.call(this);;
-	}
-
-	__class(VSlider,'laya.ui.VSlider',_super);
-	return VSlider;
-})(Slider)
 
 
 /**
@@ -27309,6 +27310,7 @@ var MainUIUI=(function(_super){
 		this.clip_flower1=null;
 		this.clip_flower2=null;
 		this.flower_img=null;
+		this.hua_ani=null;
 		MainUIUI.__super.call(this);
 	}
 
@@ -27320,51 +27322,9 @@ var MainUIUI=(function(_super){
 	}
 
 	__static(MainUIUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"image/bg.png"}},{"type":"Box","props":{"y":195,"x":183},"child":[{"type":"Image","props":{"skin":"image/img_1.png"}},{"type":"Image","props":{"x":913,"skin":"image/img_2.png"}}]},{"type":"Button","props":{"y":222,"x":725,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}},{"type":"Button","props":{"y":222,"x":1644,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}},{"type":"Button","props":{"y":37,"x":1644,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Image","props":{"y":18,"x":187,"var":"tip_img","skin":"image/tip.png"}},{"type":"Clip","props":{"y":663,"x":399,"var":"clip_flower1","skin":"image/clip_flower.png","clipX":2}},{"type":"Clip","props":{"y":663,"x":1324,"var":"clip_flower2","skin":"image/clip_flower.png","clipX":2}},{"type":"Image","props":{"y":866,"x":889,"var":"flower_img","skin":"image/flower.png"}},{"type":"Label","props":{"y":153,"x":381,"text":"上绘画与手工课","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Label","props":{"y":153,"x":1336,"text":"在饮水处接水","fontSize":31,"font":"楷体","color":"#000000","bold":true}}]};}
+	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"y":0,"x":0,"skin":"image/bg.png"}},{"type":"Box","props":{"y":195,"x":183},"child":[{"type":"Image","props":{"skin":"image/img_1.png"}},{"type":"Image","props":{"x":913,"skin":"image/img_2.png"}}]},{"type":"Button","props":{"y":222,"x":725,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}},{"type":"Button","props":{"y":222,"x":1644,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}},{"type":"Button","props":{"y":37,"x":1644,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Image","props":{"y":18,"x":187,"var":"tip_img","skin":"image/tip.png"}},{"type":"Clip","props":{"y":663,"x":399,"var":"clip_flower1","skin":"image/clip_flower.png","clipX":2}},{"type":"Clip","props":{"y":663,"x":1324,"var":"clip_flower2","skin":"image/clip_flower.png","clipX":2}},{"type":"Image","props":{"y":866,"x":889,"var":"flower_img","skin":"image/flower.png"}},{"type":"Label","props":{"y":153,"x":381,"text":"上绘画与手工课","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Label","props":{"y":153,"x":1336,"text":"在饮水处接水","fontSize":31,"font":"楷体","color":"#000000","bold":true}},{"type":"Animation","props":{"y":716,"x":1367,"width":140,"var":"hua_ani","source":"hua/hua0001.png,hua/hua0002.png,hua/hua0003.png,hua/hua0004.png,hua/hua0005.png,hua/hua0006.png,hua/hua0007.png,hua/hua0008.png,hua/hua0009.png,hua/hua0010.png,hua/hua0011.png,hua/hua0012.png,hua/hua0013.png,hua/hua0014.png,hua/hua0015.png,hua/hua0016.png,hua/hua0017.png,hua/hua0018.png,hua/hua0019.png,hua/hua0020.png,hua/hua0021.png,hua/hua0022.png,hua/hua0023.png,hua/hua0024.png,hua/hua0025.png,hua/hua0026.png,hua/hua0027.png,hua/hua0028.png,hua/hua0029.png,hua/hua0030.png,hua/hua0031.png,hua/hua0032.png,hua/hua0033.png","height":140}}]};}
 	]);
 	return MainUIUI;
-})(View)
-
-
-//class ui.Page1UI extends laya.ui.View
-var Page1UI=(function(_super){
-	function Page1UI(){
-		this.img=null;
-		Page1UI.__super.call(this);
-	}
-
-	__class(Page1UI,'ui.Page1UI',_super);
-	var __proto=Page1UI.prototype;
-	__proto.createChildren=function(){
-		laya.ui.Component.prototype.createChildren.call(this);
-		this.createView(Page1UI.uiView);
-	}
-
-	__static(Page1UI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"x":0,"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#d7f6f6"}},{"type":"Image","props":{"y":0,"x":185,"var":"img","skin":"page1/未命名-10001.png"}}]};}
-	]);
-	return Page1UI;
-})(View)
-
-
-//class ui.ProgressViewUI extends laya.ui.View
-var ProgressViewUI=(function(_super){
-	function ProgressViewUI(){
-		this.load_txt=null;
-		ProgressViewUI.__super.call(this);
-	}
-
-	__class(ProgressViewUI,'ui.ProgressViewUI',_super);
-	var __proto=ProgressViewUI.prototype;
-	__proto.createChildren=function(){
-		laya.ui.Component.prototype.createChildren.call(this);
-		this.createView(ProgressViewUI.uiView);
-	}
-
-	__static(ProgressViewUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Label","props":{"y":0,"x":0,"width":1920,"mouseEnabled":true,"height":1080,"bgColor":"#D7F6F6"}},{"type":"Label","props":{"y":500,"x":860,"width":200,"var":"load_txt","text":"0%","fontSize":80,"color":"#000000","align":"center"}}]};}
-	]);
-	return ProgressViewUI;
 })(View)
 
 
@@ -27914,6 +27874,7 @@ var MainUI=(function(_super){
 		this.animationPage.visible=false;
 		this.addChild(this.question_btn);
 		this.addChild(this.tip_img);
+		this.hua_ani.visible=false;
 	}
 
 	__class(MainUI,'view.MainUI',_super);
@@ -27921,10 +27882,7 @@ var MainUI=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
-		}
-		else{
-			SoundManager.stopAll();
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 	}
 
@@ -27960,7 +27918,9 @@ var MainUI=(function(_super){
 					SoundManager.playMusic("sounds/lose.mp3",1);
 				}
 				else if (i==2){
-					this.clip_flower2.index=1;
+					this.hua_ani.visible=true;
+					this.hua_ani.play(0);
+					this.flower_img.visible=false;
 					SoundManager.playMusic("sounds/win.mp3",1);
 				}
 				i=3

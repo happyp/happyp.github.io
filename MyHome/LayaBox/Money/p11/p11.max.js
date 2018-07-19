@@ -27914,7 +27914,7 @@ var Screen=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 		else{
 			SoundManager.stopAll();
@@ -27923,6 +27923,10 @@ var Screen=(function(_super){
 
 	/**点击按钮 出问题*/
 	__proto.onQuestion=function(){
+		var i=0;
+		for (i=1;i <=4;i++){
+			this["img_btn"+i].mouseEnabled=false;
+		}
 		SoundManager.playMusic("sounds/question"+this.questionArr[this.stpe-1]+".mp3",1,new Handler(this,this.onAnswer));
 	}
 

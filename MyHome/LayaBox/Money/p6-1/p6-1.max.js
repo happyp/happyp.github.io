@@ -27325,6 +27325,9 @@ var MainUIUI=(function(_super){
 		this.img_btn3=null;
 		this.drag_2=null;
 		this.img_btn2=null;
+		this.clip_test1=null;
+		this.clip_test2=null;
+		this.clip_test3=null;
 		MainUIUI.__super.call(this);
 	}
 
@@ -27336,7 +27339,7 @@ var MainUIUI=(function(_super){
 	}
 
 	__static(MainUIUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"skin":"image/bg_img.png"}},{"type":"Image","props":{"y":55,"x":248,"var":"tip_img","skin":"image/tip.png"}},{"type":"Button","props":{"y":74,"x":1690,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Box","props":{"y":553,"x":43,"var":"train_img"},"child":[{"type":"Clip","props":{"x":1093,"var":"clipTrue_2","skin":"image/clip_true.png","clipX":2}},{"type":"Clip","props":{"x":1527,"var":"clipTrue_3","skin":"image/clip_true.png","clipX":2}},{"type":"Clip","props":{"x":659,"var":"clipTrue_1","skin":"image/clip_true.png","clipX":2}},{"type":"Image","props":{"y":37,"skin":"image/train.png"}},{"type":"Clip","props":{"y":124,"x":580,"var":"clip_1","skin":"image/clip_1.png","name":"clip_1","clipX":2}},{"type":"Clip","props":{"y":121,"x":1022,"var":"clip_2","skin":"image/clip_2.png","name":"clip_2","clipX":2}},{"type":"Clip","props":{"y":120,"x":1436,"var":"clip_3","skin":"image/clip_3.png","name":"clip_3","clipX":2}}]},{"type":"Box","props":{"y":166,"x":180,"var":"drag_1","name":"drag_1"},"child":[{"type":"Image","props":{"skin":"image/img_1.png"}},{"type":"Button","props":{"y":66,"x":378,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}}]},{"type":"Box","props":{"y":164,"x":750,"var":"drag_3","name":"drag_3"},"child":[{"type":"Image","props":{"skin":"image/img_3.png"}},{"type":"Button","props":{"y":68,"x":387,"var":"img_btn3","skin":"image/btn_play.png","name":"img_btn3"}}]},{"type":"Box","props":{"y":152,"x":1290,"var":"drag_2","name":"drag_2"},"child":[{"type":"Image","props":{"skin":"image/img_2.png"}},{"type":"Button","props":{"y":80,"x":367,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}}]}]};}
+	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"skin":"image/bg_img.png"}},{"type":"Image","props":{"y":55,"x":248,"var":"tip_img","skin":"image/tip.png"}},{"type":"Button","props":{"y":74,"x":1690,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Box","props":{"y":553,"x":43,"var":"train_img"},"child":[{"type":"Clip","props":{"x":1093,"var":"clipTrue_2","skin":"image/clip_true.png","clipX":2}},{"type":"Clip","props":{"x":1527,"var":"clipTrue_3","skin":"image/clip_true.png","clipX":2}},{"type":"Clip","props":{"x":659,"var":"clipTrue_1","skin":"image/clip_true.png","clipX":2}},{"type":"Image","props":{"y":37,"skin":"image/train.png"}},{"type":"Clip","props":{"y":202,"x":704,"var":"clip_1","skin":"image/clip_1.png","name":"clip_1","clipX":2,"anchorY":0.5,"anchorX":0.5}},{"type":"Clip","props":{"y":199,"x":1146,"var":"clip_2","skin":"image/clip_2.png","name":"clip_2","clipX":2,"anchorY":0.5,"anchorX":0.5}},{"type":"Clip","props":{"y":198,"x":1560,"var":"clip_3","skin":"image/clip_3.png","name":"clip_3","clipX":2,"anchorY":0.5,"anchorX":0.5}}]},{"type":"Box","props":{"y":366,"x":430,"var":"drag_1","name":"drag_1","anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"skin":"image/img_1.png"}},{"type":"Button","props":{"y":66,"x":378,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}}]},{"type":"Box","props":{"y":364,"x":1000,"var":"drag_3","name":"drag_3","anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"skin":"image/img_3.png"}},{"type":"Button","props":{"y":68,"x":387,"var":"img_btn3","skin":"image/btn_play.png","name":"img_btn3"}}]},{"type":"Box","props":{"y":352,"x":1540,"var":"drag_2","name":"drag_2","anchorY":0.5,"anchorX":0.5},"child":[{"type":"Image","props":{"skin":"image/img_2.png"}},{"type":"Button","props":{"y":80,"x":367,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}}]},{"type":"Clip","props":{"y":752,"x":745,"var":"clip_test1","skin":"image/clip_1.png","name":"clip_test1","clipX":2,"anchorY":0.5,"anchorX":0.5,"alpha":0}},{"type":"Clip","props":{"y":749,"x":1187,"var":"clip_test2","skin":"image/clip_2.png","name":"clip_test2","clipX":2,"anchorY":0.5,"anchorX":0.5,"alpha":0}},{"type":"Clip","props":{"y":748,"x":1601,"var":"clip_test3","skin":"image/clip_3.png","name":"clip_3","clipX":2,"anchorY":0.5,"anchorX":0.5,"alpha":0}}]};}
 	]);
 	return MainUIUI;
 })(View)
@@ -27941,7 +27944,7 @@ var MainUI=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 		else{
 			SoundManager.stopAll();
@@ -27951,14 +27954,14 @@ var MainUI=(function(_super){
 	__proto.onDrag=function(e){
 		var str=e.currentTarget.name;
 		this.typeNum=str.substr(5,1);
+		this.addChild(this["drag_"+this.typeNum]);
 		this["drag_"+this.typeNum].startDrag(this.dragRect,false,0);
 		this["drag_"+this.typeNum].on("mouseup",this,this.onResetPoint);
 	}
 
 	__proto.onResetPoint=function(){
 		this["drag_"+this.typeNum].off("mouseup",this,this.onResetPoint);
-		if (Maths.dis(this["drag_"+this.typeNum].x,this["drag_"+this.typeNum].y,this["clip_"+this.typeNum].localToGlobal(new Point(0,0)).x,this["clip_"+this.typeNum].localToGlobal(new Point(0,0)).y)< this["clip_"+this.typeNum].width){
-			console.log("ok");
+		if(Math.abs(this["drag_"+this.typeNum].x-this["clip_test"+this.typeNum].x)< 320 && Math.abs(this["drag_"+this.typeNum].y-this["clip_test"+this.typeNum].y)< 225){
 			this["drag_"+this.typeNum].stopDrag();
 			this["drag_"+this.typeNum].visible=false;
 			this["clip_"+this.typeNum].index=1;
@@ -27979,6 +27982,7 @@ var MainUI=(function(_super){
 
 	__proto.onImagePlay=function(e){
 		this.animationPage.visible=true;
+		this.addChild(this.animationPage);
 		this.animationPage.x=0;
 		switch(e.currentTarget.name){
 			case "img_btn1":

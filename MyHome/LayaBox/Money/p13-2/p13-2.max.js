@@ -15252,7 +15252,7 @@ var WebAudioSoundChannel=(function(_super){
 */
 //class com.AnimationPage extends laya.display.Sprite
 var AnimationPage=(function(_super){
-	function AnimationPage(loop,bgColor){
+	function AnimationPage(loop,bgColor,isGoBack){
 		/**是否循环播放*/
 		this.loop=false;
 		/**绘制动画的图像*/
@@ -15268,10 +15268,13 @@ var AnimationPage=(function(_super){
 		this.pageType="";
 		/**总长度*/
 		this.total=10;
+		this.isGoBack=false;
 		AnimationPage.__super.call(this);
 		(loop===void 0)&& (loop=false);
 		(bgColor===void 0)&& (bgColor="#fff");
+		(isGoBack===void 0)&& (isGoBack=true);
 		this.bgColor=bgColor;
+		this.isGoBack=isGoBack;
 		this.bg=new Sprite();
 		this.bg.graphics.drawRect(0,0,1920,1080,bgColor);
 		this.bg.width=1920;
@@ -15319,6 +15322,7 @@ var AnimationPage=(function(_super){
 
 	/**播放动画*/
 	__proto.onAnimation=function(){
+		this.index++;
 		if (this.index < 10){
 			this.roleAni.skin=this.pageType+"000"+this.index+".png"
 		}
@@ -15334,7 +15338,6 @@ var AnimationPage=(function(_super){
 				Laya.timer.clear(this,this.onAnimation);
 			}
 		}
-		this.index++;
 	}
 
 	/**动画播放完毕*/
@@ -15347,11 +15350,13 @@ var AnimationPage=(function(_super){
 
 	/**返回*/
 	__proto.onBack=function(e){
-		console.log("ddddd")
-		this.off("mousedown",this ,this.onBack);
-		Laya.timer.clear(this,this.onAnimation);
-		this.visible=false;
-		SoundManager.stopAll();
+		if (this.isGoBack){
+			console.log("ddddd")
+			this.off("mousedown",this ,this.onBack);
+			Laya.timer.clear(this,this.onAnimation);
+			this.visible=false;
+			SoundManager.stopAll();
+		}
 	}
 
 	return AnimationPage;
@@ -27898,7 +27903,7 @@ var Screen=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 		else{
 			SoundManager.stopAll();

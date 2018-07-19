@@ -27322,13 +27322,13 @@ var GraphicAnimation=(function(_super){
 //class ui.ScreenUI extends laya.ui.View
 var ScreenUI=(function(_super){
 	function ScreenUI(){
+		this.clip_img1=null;
+		this.clip_img2=null;
 		this.tip_img=null;
 		this.question_btn=null;
 		this.xiao_clip1=null;
 		this.xiao_clip2=null;
 		this.xiao_img=null;
-		this.clip_img1=null;
-		this.clip_img2=null;
 		this.img_btn1=null;
 		this.img_btn2=null;
 		this.ani_2=null;
@@ -27344,7 +27344,7 @@ var ScreenUI=(function(_super){
 	}
 
 	__static(ScreenUI,
-	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"skin":"image/bg_img.png"}},{"type":"Image","props":{"y":45,"x":197,"var":"tip_img","skin":"image/tip.png"}},{"type":"Button","props":{"y":53,"x":1643,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Image","props":{"y":655,"x":495,"var":"xiao_clip1","skin":"image/quan.png"}},{"type":"Image","props":{"y":651,"x":1194,"var":"xiao_clip2","skin":"image/quan.png"}},{"type":"Image","props":{"y":831,"x":898,"var":"xiao_img","skin":"image/hua.png"}},{"type":"Clip","props":{"y":195,"x":360,"var":"clip_img1","skin":"image/clip_img1.png","name":"clip_img1","clipX":2}},{"type":"Clip","props":{"y":195,"x":1064,"var":"clip_img2","skin":"image/clip_img2.png","name":"clip_img2","clipX":2}},{"type":"Button","props":{"y":219,"x":765,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}},{"type":"Button","props":{"y":221,"x":1468,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}},{"type":"Animation","props":{"y":684,"x":1235,"var":"ani_2","source":"hua/hua0001.png,hua/hua0002.png,hua/hua0003.png,hua/hua0004.png,hua/hua0005.png,hua/hua0006.png,hua/hua0007.png,hua/hua0008.png,hua/hua0009.png,hua/hua0010.png,hua/hua0011.png,hua/hua0012.png,hua/hua0013.png,hua/hua0014.png,hua/hua0015.png,hua/hua0016.png,hua/hua0017.png,hua/hua0018.png,hua/hua0019.png,hua/hua0020.png,hua/hua0021.png,hua/hua0022.png,hua/hua0023.png,hua/hua0024.png,hua/hua0025.png,hua/hua0026.png,hua/hua0027.png,hua/hua0028.png,hua/hua0029.png,hua/hua0030.png,hua/hua0031.png,hua/hua0032.png,hua/hua0033.png","autoPlay":true}},{"type":"Animation","props":{"y":691,"x":536,"var":"ani_1","source":"hua/hua0001.png,hua/hua0002.png,hua/hua0003.png,hua/hua0004.png,hua/hua0005.png,hua/hua0006.png,hua/hua0007.png,hua/hua0008.png,hua/hua0009.png,hua/hua0010.png,hua/hua0011.png,hua/hua0012.png,hua/hua0013.png,hua/hua0014.png,hua/hua0015.png,hua/hua0016.png,hua/hua0017.png,hua/hua0018.png,hua/hua0019.png,hua/hua0020.png,hua/hua0021.png,hua/hua0022.png,hua/hua0023.png,hua/hua0024.png,hua/hua0025.png,hua/hua0026.png,hua/hua0027.png,hua/hua0028.png,hua/hua0029.png,hua/hua0030.png,hua/hua0031.png,hua/hua0032.png,hua/hua0033.png","autoPlay":true}}]};}
+	['uiView',function(){return this.uiView={"type":"View","props":{"width":1920,"height":1080},"child":[{"type":"Image","props":{"skin":"image/bg_img.png"}},{"type":"Clip","props":{"y":145,"x":360,"var":"clip_img1","skin":"image/clip_img1.png","name":"clip_img1","clipX":2}},{"type":"Clip","props":{"y":145,"x":1064,"var":"clip_img2","skin":"image/clip_img2.png","name":"clip_img2","clipX":2}},{"type":"Image","props":{"y":45,"x":197,"var":"tip_img","skin":"image/tip.png"}},{"type":"Button","props":{"y":53,"x":1643,"var":"question_btn","stateNum":1,"skin":"image/btn_question.png"}},{"type":"Image","props":{"y":655,"x":495,"var":"xiao_clip1","skin":"image/quan.png"}},{"type":"Image","props":{"y":651,"x":1194,"var":"xiao_clip2","skin":"image/quan.png"}},{"type":"Image","props":{"y":831,"x":898,"var":"xiao_img","skin":"image/hua.png"}},{"type":"Button","props":{"y":219,"x":765,"var":"img_btn1","skin":"image/btn_play.png","name":"img_btn1"}},{"type":"Button","props":{"y":221,"x":1468,"var":"img_btn2","skin":"image/btn_play.png","name":"img_btn2"}},{"type":"Animation","props":{"y":684,"x":1235,"var":"ani_2","source":"hua/hua0001.png,hua/hua0002.png,hua/hua0003.png,hua/hua0004.png,hua/hua0005.png,hua/hua0006.png,hua/hua0007.png,hua/hua0008.png,hua/hua0009.png,hua/hua0010.png,hua/hua0011.png,hua/hua0012.png,hua/hua0013.png,hua/hua0014.png,hua/hua0015.png,hua/hua0016.png,hua/hua0017.png,hua/hua0018.png,hua/hua0019.png,hua/hua0020.png,hua/hua0021.png,hua/hua0022.png,hua/hua0023.png,hua/hua0024.png,hua/hua0025.png,hua/hua0026.png,hua/hua0027.png,hua/hua0028.png,hua/hua0029.png,hua/hua0030.png,hua/hua0031.png,hua/hua0032.png,hua/hua0033.png","autoPlay":true}},{"type":"Animation","props":{"y":691,"x":536,"var":"ani_1","source":"hua/hua0001.png,hua/hua0002.png,hua/hua0003.png,hua/hua0004.png,hua/hua0005.png,hua/hua0006.png,hua/hua0007.png,hua/hua0008.png,hua/hua0009.png,hua/hua0010.png,hua/hua0011.png,hua/hua0012.png,hua/hua0013.png,hua/hua0014.png,hua/hua0015.png,hua/hua0016.png,hua/hua0017.png,hua/hua0018.png,hua/hua0019.png,hua/hua0020.png,hua/hua0021.png,hua/hua0022.png,hua/hua0023.png,hua/hua0024.png,hua/hua0025.png,hua/hua0026.png,hua/hua0027.png,hua/hua0028.png,hua/hua0029.png,hua/hua0030.png,hua/hua0031.png,hua/hua0032.png,hua/hua0033.png","autoPlay":true}}]};}
 	]);
 	return ScreenUI;
 })(View)
@@ -27906,7 +27906,7 @@ var Screen=(function(_super){
 	__proto.onTipShow=function(e){
 		this.tip_img.visible=!this.tip_img.visible
 		if (this.tip_img.visible){
-			SoundManager.playMusic("sounds/tip.mp3",1);
+			SoundManager.playSound("sounds/tip.mp3",1);
 		}
 		else{
 			SoundManager.stopAll();
